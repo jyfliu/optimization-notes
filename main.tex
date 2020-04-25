@@ -1,0 +1,1332 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+\usepackage{amsthm}
+\usepackage{faktor}
+\usepackage{diagbox}
+\DeclareMathAlphabet{\mymathbb}{U}{bbold}{m}{n} 
+\numberwithin{equation}{section}
+
+\usepackage[margin=1.4in]{geometry}
+% Formatting
+\setlist[itemize]{noitemsep, topsep=-8pt}
+\setlist[enumerate]{noitemsep, topsep=-8pt}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+
+
+
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}%
+
+\newtheorem{remark}[theorem]{Remark}
+
+% blackboard bold letters
+\newcommand{\bA}{\mathbb{A}}
+\newcommand{\bB}{\mathbb{B}}
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bD}{\mathbb{D}}
+\newcommand{\bE}{\mathbb{E}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bG}{\mathbb{G}}
+\newcommand{\bH}{\mathbb{H}}
+\newcommand{\bI}{\mathbb{I}}
+\newcommand{\bJ}{\mathbb{J}}
+\newcommand{\bK}{\mathbb{K}}
+\newcommand{\bL}{\mathbb{L}}
+\newcommand{\bM}{\mathbb{M}}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bO}{\mathbb{O}}
+\newcommand{\bP}{\mathbb{P}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bS}{\mathbb{S}}
+\newcommand{\bT}{\mathbb{T}}
+\newcommand{\bU}{\mathbb{U}}
+\newcommand{\bV}{\mathbb{V}}
+\newcommand{\bW}{\mathbb{W}}
+\newcommand{\bX}{\mathbb{X}}
+\newcommand{\bY}{\mathbb{Y}}
+\newcommand{\bZ}{\mathbb{Z}}
+
+% calligraphic letters
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}} 
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cZ}{\mathcal{Z}}
+
+% scribe letters
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+% common text in equations
+\newcommand{\AND}{\text{ and }}
+\newcommand{\FOR}{\text{ for }}
+\newcommand{\FORAL}{\text{ for all }}
+\newcommand{\IF}{\text{ if }}
+\newcommand{\IFF}{\text{ if and only if }}
+\newcommand{\OR}{\text{ or }}
+\newcommand{\ST}{\text{ such that }}
+\newcommand{\LHS}{\text{LHS}}
+\newcommand{\RHS}{\text{RHS}}
+\newcommand{\QAND}{\quad\text{ and }\quad}
+\newcommand{\QFOR}{\quad\text{ for }\quad}
+\newcommand{\QFORAL}{\quad\text{ for all }\quad}
+\newcommand{\QIF}{\quad\text{ if }\quad}
+\newcommand{\QIFF}{\quad\text{ if and only if }\quad}
+\newcommand{\QOR}{\quad\text{ or }\quad}
+\newcommand{\QST}{\quad\text{ st }\quad}
+\newcommand{\QLHS}{\quad\text{ LHS }\quad}
+\newcommand{\QRHS}{\quad\text{ RHS }\quad}
+
+% functions and operators
+
+
+% math 147
+
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\db}{\text{d}}
+\newcommand{\dd}[1]{\frac{\text{d}}{\text{d}#1}}
+\newcommand{\dbyd}[2]{\frac{\text{d}#1}{\text{d}#2}}
+\newcommand{\dlim}{\displaystyle\lim\limits}
+\newcommand{\dsum}{\displaystyle\sum\limits}
+
+% set theory
+\newcommand{\set}[2]{\left\{#1\,:\,#2\right\}}
+
+% math 146
+\newenvironment{lbmatrix}[1]
+    {\left[\array{@{}#1@{}}}
+  {\endarray\right]}
+
+%\makeatletter
+%\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  %\hskip -\arraycolsep
+  %\let\@ifnextchar\new@ifnextchar
+  %\array{#1}}
+%\makeatother
+
+\newcommand{\lspan}{\operatorname{span}}
+\newcommand{\lrank}{\operatorname{rank}}
+\newcommand{\lnullity}{\operatorname{nullity}}
+\newcommand{\lker}{\operatorname{ker}}
+\newcommand{\lcol}{\operatorname{col}}
+\newcommand{\lrow}{\operatorname{row}}
+\newcommand{\ltr}{\operatorname{tr}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\ldim}{\operatorname{dim}}
+\newcommand{\scl}{\operatorname{cl}}
+\newcommand{\sgn}{\operatorname{sgn}}
+
+\newcommand{\va}{\vec{a}}
+\newcommand{\vb}{\vec{b}}
+\newcommand{\vc}{\vec{c}}
+\newcommand{\vd}{\vec{d}}
+\newcommand{\ve}{\vec{e}}
+\newcommand{\vf}{\vec{f}}
+\newcommand{\vg}{\vec{g}}
+\newcommand{\vh}{\vec{h}}
+\newcommand{\vi}{\vec{i}}
+\newcommand{\vj}{\vec{j}}
+\newcommand{\vk}{\vec{k}}
+\newcommand{\vl}{\vec{l}}
+\newcommand{\vm}{\vec{m}}
+\newcommand{\vn}{\vec{n}}
+\newcommand{\vo}{\vec{o}}
+\newcommand{\vp}{\vec{p}}
+\newcommand{\vq}{\vec{q}}
+\newcommand{\vr}{\vec{r}}
+\newcommand{\vs}{\vec{s}}
+\newcommand{\vt}{\vec{t}}
+\newcommand{\vu}{\vec{u}}
+\newcommand{\vv}{\vec{v}}
+\newcommand{\vw}{\vec{w}}
+\newcommand{\vx}{\vec{x}}
+\newcommand{\vy}{\vec{y}}
+\newcommand{\vz}{\vec{z}}
+
+\newcommand{\ox}{\overline{x}}
+\newcommand{\oy}{\overline{y}}
+
+% math 249
+\def\multiset#1#2{\ensuremath{\left(\kern-.3em\left(\genfrac{}{}{0pt}{}{#1}{#2}\right)\kern-.3em\right)}}
+\newcommand{\fall}[1]{^{\mspace{2mu}\underline{\mspace{-2mu}#1\mspace{-2mu}}\mspace{2mu}}}
+\newcommand{\rise}[1]{^{\mspace{2mu}\overline{\mspace{-2mu}#1\mspace{-2mu}}\mspace{2mu}}}
+\newcommand{\girth}{\text{girth}}
+
+% stat 230
+\newcommand{\probdef}{\frac{\text{\# Favourable Outcomes}}{\text{\# Total Outcomes}}}
+
+% math 245
+
+% math 247
+\newcommand{\Alt}{\operatorname{Alt}}
+\newcommand{\osc}{\operatorname{osc}}
+\newcommand{\sbd}{\operatorname{bd}}
+\newcommand{\lint}{\underline{\int}}
+\newcommand{\uint}{\overline{\int}}
+\newcommand{\sint}{\operatorname{int}}
+
+% co 255
+\newcommand{\tmax}{\text{maximize}}
+\newcommand{\tmin}{\text{minimize}}
+\newcommand{\tMax}{\text{Maximize}}
+\newcommand{\tMin}{\text{Minimize}}
+\newcommand{\tst}{\text{s.t.}}
+
+\newcommand{\vzero}{\mymathbb{0}}
+\newcommand{\vone}{\mymathbb{1}}
+\newcommand{\vtwo}{\mymathbb{2}}
+\newcommand{\vthree}{\mymathbb{3}}
+\newcommand{\vfour}{\mymathbb{4}}
+\newcommand{\vfive}{\mymathbb{5}}
+\newcommand{\vsix}{\mymathbb{6}}
+\newcommand{\vseven}{\mymathbb{7}}
+\newcommand{\veight}{\mymathbb{8}}
+\newcommand{\vnine}{\mymathbb{9}}
+\newcommand{\epi}{\operatorname{epi}}
+\newcommand{\conv}{\operatorname{conv}}
+\newcommand{\cone}{\operatorname{cone}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\vol}{\operatorname{vol}}
+\newcommand{\dom}{\operatorname{dom}}
+\newcommand{\ext}{\operatorname{ext}}
+\newcommand{\diag}{\operatorname{diag}}
+\title{Convex Optimization and Analysis}
+\author{Jeffrey Liu}
+\date{}
+
+\begin{document}
+
+\maketitle
+\newpage
+\hrule
+
+\section*{Foreword}
+Hi, Jeffrey here. Today is St Patrick's Day, 2020, but this year I won't be  drinking my problems away on Ezra. I'm not sure when in the future that you, if anyone, will be reading this, so I'll forgive you if you don't remember that this was the year of the COVID-19 pandemic. My classes were suspended last Friday, and I've spent the better part of the break so far playing video games and watching YouTube\footnote{If my parents or any future professors ever read this, I was also reading lots of textbooks.}.
+
+To keep my sanity over the next couple months, I've also decided to start a collection of notes for some of my more favoured subjects. Of course, I'm still a student, but I hope that these writings will form a strong reference for the CO 463/466/471 trio.
+
+Convexity is a beautiful property that lends itself to many powerful results in algebra, analysis, and geometry. Applications have been found in many branches of pure mathematics, engineering, finance, computer science, physics, and of course optimization. I'll be basing these notes off of the extensive literature in the subject, in particular: Boyd and Vandenberghe: \textit{Convex Optimization}; and Wolkowicz's CO 463 course notes\footnote{I'll be following the course notes the closest, but with my own commentary and editorials.}, among others.
+
+In contrast to these sources, however, I'll be exploring the subject from the perspective of an undergraduate, so I'll try my best to motivate.
+
+I hope that these notes will form a brief yet extensive overview of the subject, but I must affirm that these notes do \textbf{not} replace a textbook. In particular, I won't be leaving very many insightful exercises and may leave out many illustrative applications (although I will try my best to include further readings). A quick note: some elementary linear algebra and calculus is expected, although I'll try to have an appendix with some prerequisite theorems.
+
+In any case, enjoy\footnote{Also, special thanks to my CO 463 Professor Henry Wolkowicz, as well as my mom and dad for their continued belief in me.}!
+\newpage
+\section*{Notation}
+I try to use standard notation. If you are unfamiliar with any of these definitions, please read the appendix.
+\subsection{Sets and Vector Spaces}
+\begin{tabular}{p{1.75cm}p{10cm}}
+$\bN$ & The set of non-negative integers $\{0, 1, 2, ...\}$\\
+$[n]$ & The set of integers $\{1, 2, ..., n\}$\\
+$\bZ, \bZ_+, \bZ_{++}$ & The set of integers, resp., the non-negative and positive integers\\
+$\bR, \bR_+, \bR_{++}$ & The set of real numbers, resp., the non-negative and positive reals\\
+$\bR^n$ & The vector space of column vectors with $n$ real entries, together with the standard inner product\\
+$\bE, \bE^n$ & Any Euclidean vector space\footnotemark (finite dimensional real inner product space), resp., of dimension $n$ if specified\\
+$\bM^n$ & The vector space of $n\times n$ square matrices with real entries, together with the Frobenius inner product\\
+$\bS_+^n, \bS_{++}^n$ & The subset of $\bM^n$ consisting of positive semidefinite (resp. positive definite) matrices.\\
+\end{tabular}
+\footnotetext{An astute reader may note that all $n$ dimensional Euclidean vector spaces are isomorphic to $\bR^n$, and may ask why we bother distinguishing them. Honestly I think the only reason is so that we can be lazy and always assume $\bR^n$ refers to that specific vector space with the standard inner product.}
+ETC TODO
+\subsection{Vectors}
+\begin{tabular}{p{1.75cm}p{10cm}}
+$x^\top$ & The transpose of $x$\\
+$I, I_n$ & The identity matrix (resp. of dimension $n$ if specified)\\
+$x_k$ & The $k$\\
+\end{tabular}
+- subseteq
+- inner product
+- norm, $l_p$ norm
+- the $i$th basis vector
+- vector of ones, zeros
+- diag
+\newpage
+\section*{Introduction}
+Put some pictures??
+
+Historically, mathematicians have preferred structural results over numerical ones. Greats such as Euler, Gauss, Riemann, etc., have been devoted to the creation of beautiful theories in algebra, analysis, geometry, and number theory. It wasn't until the 20th century and the invention and popularization of the computer did the study of algorithms and computation take off.
+
+Combinatorics and Optimization are two fields which blossomed in this new age. Many computational subfields of combinatorics, including those of graph theory, matroid theory, and polyhedral theory, have only been developed recently. The simplex method, published by Dantzig in 1947 CITATION NEEDED, was the first of many algorithms with promising practicality, and with it came the field of operations research.
+
+Convexity, as a geometric property, has been known since forever. The power of the condition however wasn't realized until the late 1800's when THIS PERSON I FORGET WHO made some sick theorem I FORGET WHAT. Minkowski?? Caratheodory?? Nowadays, convex optimization is used everywhere, including BLAH BLAH
+
+We'll first discuss convex geometry and the natural extension to functions. With this, we'll be able to analyze convex programs and develop optimality constraints. These constraints, when violated, give arise to algorithms. Finally, we'll conclude with as many interesting applications as I could find.
+
+For better flow, I will not prove many of the propositions and theorems unless they are particularly insightful. I'll have an appendix on hints and solutions for some the more tricky proofs
+
+- you do not need to read these notes in linear order! I'll try to make a prerequisite DAG. So please don't be discouraged like I was and think that you have to read ??? pages of geometry before you even see a convex program. In fact, you may be able to understand many of the algorithms by simply reading their description and googling any definitions you haven't heard of before.
+
+But still, it's really important to know the basics. I'm really sorry that sections 1 and 2 may get a little boring, but we need to learn to walk before we can run.
+THIS PARAGRAPH NOT NEEDED??
+\newpage
+\section{Convex Geometry}
+We shall explore the main geometric structures which arise in convex optimization, beginning with, of course, sets.
+\subsection{Convex Sets}
+\subsubsection{Definitions}
+Although some notion of convexity has existed geometrically since at least Archimedes (SOURCE: a short history of convexity), the modern definition of a convex set is actually an algebraic one:
+\begin{definition}
+    \label{defconvex}%%
+    A subset $C\subseteq\bE$ is \textbf{convex} if
+    \begin{equation} \label{defconvexeq}%%
+    x, y\in C, \lambda\in[0,1],\quad\implies\quad (1-\lambda)x+\lambda y\in C.\end{equation}
+\end{definition}
+We can see that, for a fixed $x\AND y$, the quantity $(1-\lambda)x+\lambda y$ represents the closed line segment between $x$ and $y$ as $\lambda$ ranges over the unit interval. Then Equation \ref{defconvexeq} is equivalent to the statement that the set $S$ contains all of its line segments. There are a couple alternate equivalent formulations of convexity which may (or may not) help you visualize the definition of convexity:
+\begin{proposition}
+    Let $C\subseteq\bE$. Then the following are equivalent:
+    \begin{enumerate}[label=(\roman*)]
+        \item $C$ is convex,
+        \item $C$ contains all of its convex combinations, that is, if $x^{(1)}, \dots, x^{(k)}\in C$ and $\lambda_1, \dots, \lambda_k\in\bR_+$ with $\sum_{i=1}^k\lambda_i=1$, then the \textbf{convex combination}\footnotemark
+        \begin{equation}\sum_{i=1}^k\lambda_ix^{(i)}\end{equation} belongs to $C$ as well.
+        \item The intersection of $C$ with any line is either the empty set or a connected interval.
+        \end{enumerate}
+\end{proposition}
+\footnotetext{This is also called the weighted mean (from physics), and a generalization of barycentric coordinates. You can also think of the $\lambda_i$ as being a probability distribution.}
+Convexity is an extraordinarily simple condition; many everyday sets can easily be shown to be convex. We'll list a few examples:
+\begin{example}
+    The empty set is convex (vacuously).
+\end{example}
+\begin{example}
+    All subspaces $S$ of $\bE$ are convex. In addition, translations of subspaces ($S+\overline x$ for some $\overline x\in\bE$) are convex. These translations are called affine sets (more on this later!).
+\end{example}
+\begin{example}
+    All polyhedra, sets of the form (where $A\in\bR^{n\times m}, b\in\bR^m$)
+    \begin{equation}
+        P=\set{x\in\bE}{Ax\le b},
+    \end{equation}
+    are convex. In particular if $m=1$ then we get the closed halfspace
+    \begin{equation}
+        H=\set{x\in\bE}{\langle\phi, x\rangle \le \alpha}
+    \end{equation}
+    is convex as well. The open halfspace is also convex, although it is not a polyhedra.
+\end{example}
+We have a few equivalent formulations...
+
+\subsubsection{Operations Preserving Convexity}
+There are several common operations which preserve convexity of a set. We'll be able to use these operations to build increasingly sophisticated sets from the basic examples given above. 
+These propositions all follow from definitions, and the reader is encouraged to prove them on their own.
+\begin{proposition}
+    \label{propcvxintersection}
+    Let $C_i\subseteq\bE, i\in I$ be a collection of convex sets, where $I$ is a (potentially uncountably large) index set. Then the intersection
+    \begin{equation}
+        \bigcap_{i\in I} C_i
+    \end{equation}
+    is convex.
+\end{proposition}
+In particular, the \textit{convex hull} of a set $S$, possibly defined as the intersection of all convex sets containing $S$, is convex. We'll talk more about this later.
+\begin{proposition}
+    Let $C_1, C_2\subseteq\bE$ be two convex sets, and $\alpha,\beta\in\bR_+$. Then the Minkowski sum, defined by
+    \begin{equation}
+        \alpha C_1+\beta C_2:=\set{\alpha x+\beta y}{x\in C_1, y\in C_2}
+    \end{equation}
+    is a convex set.
+\end{proposition}
+\begin{proposition}
+    Let $C_i\subseteq\bE^{n_i}$ for $i\in[m]$. Then the Cartesian product defined by
+    \begin{equation}
+        C_1\times\dots\times C_m=\set{(x_1, \dots, x_m)\in\bE^{n_1\cdot\dots\cdot n_m}}{x_i\in C_i, \forall i\in[m]}
+    \end{equation}
+    is a convex set. Conversely, if $C\subseteq\bE^{{n_1}\times\dots\times{n_m}}$ is a convex set, then each projection
+    \begin{equation}
+        \set{x_i\subseteq\bE^{n_i}}{(x_1,\dots, x_m)\in\bE^{n_1\times\dots\times n_m}}
+    \end{equation}
+    is a convex set as well, for $i\in [m]$.
+\end{proposition}
+\begin{proposition}
+    Let $\cA:\bE^n\to\bE^m$ be an affine mapping. Then if $C\subseteq\bE^n$ and $D\subseteq\bE^m$ are convex sets, both the image $\cA(C)$ and the pre-image $\cA^{-1}(D)$ are convex sets.
+\end{proposition}
+\begin{proposition}
+    \label{prpconvexintcl}
+    Let $C\subseteq\bE$ be a convex set. Then the interior $\sint C$ and closure $\scl C$ are convex sets as well.
+\end{proposition}
+Actually, we shall see that we can strengthen Proposition \ref{prpconvexintcl} when we define the \textit{relative interior}, in case $C$ has a ``lower dimension'' than $\bE$. But this will come later.
+\subsubsection{Convex Hulls and Carath\'eodory's Theorem}
+Many problems encountered in nature will \textbf{not} be convex (and usually will be difficult to solve), so we'll formulate strategies to relax these problems so that they are convex. The simplest of which is the convex hull.
+\begin{definition}
+    Let $S\subseteq\bE$ be \textit{any} set. Then the \textbf{convex hull} of $S$, denoted $\conv S$, is the \textit{smallest convex set containing $S$}. That is, if $C$ is any other convex set containing $S$, then $\conv S\subseteq C$.
+\end{definition}
+It's easy to show that the convex hull of $S$ is the intersection of all convex sets containing $S$. In fact, this also serves as a decent definition of the convex hull, as by Proposition \ref{propcvxintersection} we know that this intersection is convex. Some texts prefer the following equivalent formulation of convex hull:
+\begin{proposition}
+    Let $S\subseteq\bE$. Then
+    \begin{equation}
+        \conv S=\set{\sum_{i=1}^k\lambda_ix^{(i)}}{k\in \bZ_{++}, \sum_{i=1}^k\lambda_i=1, \lambda\in \bR_+^k, x^{(i)}\in S}.
+    \end{equation}
+\end{proposition}
+That is, the convex hull of $S$ is precisely the set of all convex combinations of points from $S$. Now, despite the simplicity of the definition of convexity, we can build a very rich theory to describe these objects.
+We can immediately state a beautiful result of the subject.
+\begin{theorem}[Carath\'eodory, 1911]
+    \label{thmcaratheodory}%
+    Let $S\subseteq\bE^n$. Then the convex hull of $S$ is
+    \begin{equation}
+        \label{thmcaratheodoryeq}
+        \set{\sum_{i=1}^{\mathbf{n+1}}\lambda_ix^{(i)}}{ \sum_{i=1}^{n+1}\lambda_i=1, \lambda\in \bR_+^{n+1}, x^{(i)}\in S}.
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    We'll show that Carath\'eodory's Theorem follows from linear independence\footnote{Although there is a very nice proof using some linear programming theory which I'll have in the appendix}. Insert proof here.
+\end{proof}
+In other words, \textbf{no matter how misbehaved} $S$ is as a set, any point in the convex hull of $S$ can be written as a convex combination of just $n+1$ points from $S$. This is remarkable, as it will often allow us to simplify arbitrarily many variables into just $n+1$. In fact, if $S$ is sufficiently well behaved, we get an even stronger statement.
+\begin{theorem}[Fenchel and Blunt, YYYY?]
+    Let $S\subseteq\bE^n$, and suppose that $S$ has no more than $n$ connected components. Then only $n$ points are needed in Theorem \ref{thmcaratheodory}.
+\end{theorem}
+There are several related theorems that are worth knowing, although they don't appear too often\footnote{Some of the proofs of these theorems have appeared as challenge problems on some of my exams, so beware.}.
+\begin{corollary}[A consequence of Carath\'eodory's Theorem]
+    The convex hull of a compact set is compact.
+\end{corollary}
+(Beware, however, that the convex hull of a closed set may not be closed. Try to find a counterexample!)
+\begin{theorem}[Helly, YYYY]
+    Let $C^{(i)}\subseteq \bE^n, i\in I$ be a (potentially uncountable?) collection of compact convex sets. Then if every subcollection of $n+1$ sets have a non-empty intersection, then
+    \begin{equation}
+        \bigcap_{i\in I} C^{(i)}\neq \emptyset
+    \end{equation}
+\end{theorem}
+\begin{theorem}[Radon, YYYY]
+    Let $\{x^{(1}), ..., x^{(n+2)}\}\subseteq\bE^n$. Then there is a partition $I_1, I_2$ of the indices $[n+2]$ such that the convex hulls
+    \begin{equation}
+    C_1=\conv\set{x^{(i)}}{i\in I_1},\qquad C_2=\conv\set{x^{(i)}}{i\in I_2}
+    \end{equation}
+    intersect $C_1\cap C_2\neq\emptyset$.
+\end{theorem}
+\begin{theorem}[Shapley-Folkman, YYYY]
+    GOES HERE
+\end{theorem}
+\subsection{Affine sets}
+Earlier, we alluded to the notion of an \textit{affine set}, as well as the \textit{dimension} and \textit{relative interior} of a set in $\bE$. We make these definitions now.
+
+If we do not restrict $\lambda$ to the interval $[0,1]$ in the definition of convexity, then we get another definition:
+\begin{definition}
+    \label{defaffine}%%
+    A subset $S\subseteq\bE$ is \textbf{affine} if
+    \begin{equation} \label{defaffineeq}%%
+    x, y\in S, \lambda\in\bR,\quad\implies\quad (1-\lambda)x+\lambda y\in S.\end{equation}
+\end{definition}
+
+translation of a subspace
+
+affinely independent
+
+Dimension, Relative interior
+\subsection{Geometry with Convex Sets}
+\subsubsection{Extreme Points and Faces}
+What is this used for? Idk what facial reduction and stuff is yet..
+\begin{proposition}
+    Let $C\subseteq\bE$ be a convex set. Then $\ext C$ is non-empty if and only if $C$ is pointed, ie., $C$ does not contain any lines.
+\end{proposition}
+
+We conclude this section with the interior description of a convex set:
+\begin{theorem}[Minkowski]
+    Let $C\subseteq\bE$ be a bounded convex set. Then
+    \begin{equation}
+        C = \conv\ext C.
+    \end{equation}
+\end{theorem}
+In other words, the set of extreme points of $C$ is the smallest set which is ``good enough'' to determine $C$ via its convex hull; it is the ``shortest worker's instruction for building the set''. 
+\subsubsection{Projections}
+Projections onto convex sets will be our main tools in proving hyperplane separation theorems. They are a natural extension of projections onto subspaces from linear algebra.
+
+Recall that we can define an \textit{orthogonal projection} $P$ onto a subspace $V\subseteq\bE$ as a linear transformation satisfying $P^2=P^\top=P$. AND THEN w=v+v perp, etc
+
+We'd like to define the projection onto a convex set similarly.
+\begin{definition}
+    \label{defprojectioncvx}%
+    Let $C\subseteq\bE$ be a non-empty closed convex set, and $x\in\bE$. Then define the \textbf{projection} of $x$ onto $C$ , denoted as $P_C(x)$, as the \textit{unique} solution to
+    \begin{equation}
+        P_C(x)=\arg\min_{y\in C}\{\norm{y-x}\}.
+    \end{equation}
+\end{definition}
+It takes a little work to see why $P_C(x)$ always exists, and if it does, why it's unique. 
+\begin{proposition}[Kolmogorov's Criterion, YYYY]
+    Let $C\subseteq\bE$ be a non-empty closed convex set, and $x\in\bE$. Then $P_C(x)$, as defined in Definition \ref{defprojectioncvx}, is well defined. In particular, $y_x=P_C(x)$ if and only if
+    \begin{equation}
+        \langle x-y_x, y-y_x\rangle\le0, \forall y\in C.
+    \end{equation}
+\end{proposition}
+\begin{proof}
+??
+\end{proof}
+
+Moreau decomp
+
+Here are a few nice exercises with projections.
+\begin{proposition}
+    Let $x,y\in\bE$ and $C\subseteq\bE$ be a non-empty closed convex set. Then
+    \begin{equation}
+        \norm{P_C(x)-P_C(y)} \le \norm{x-y}.
+    \end{equation}
+\end{proposition}
+Insert some more...
+\subsubsection{Separation}
+Preliminary version:
+\begin{theorem}[Hyperplane Separation]
+    \label{thmhyperplanesep}%
+    Let $C\subseteq\bE$ be a closed convex set, and suppose that $x\in\bE\setminus C$. Then there exists a hyperplane separating $x$ from $C$, i.e., there exists $\phi\in\bE,\alpha\in\bR$ such that
+    \begin{equation}
+        \langle c,\phi\rangle\le\alpha<\langle x,\phi\rangle,
+    \end{equation}
+    for all $c\in C$.
+\end{theorem}
+We can think of hyperplane separation as another \textit{Theorem of the Alternative}, in the sense that \textit{either} $x$ is contained inside $C$, or it isn't and we have a hyperplane certificate to prove it. This is the beginning of some of the duality theory we shall develop.
+
+We can immediately generalize Theorem $\ref{thmhyperplanesep}$ where we don't just separating a point from a convex set, but instead separate two convex sets from each other:
+\begin{corollary}
+    Let $C_1, C_2\subseteq\bE$ be two non-empty closed convex sets, where $C_2$ is compact and $C_1\cap C_2=\emptyset$. Then there exists a strictly separating hyperplane between $C_1$ and $C_2$, ie., there exists $\phi\in\bE, \alpha\in\bR$ such that
+    \begin{equation}
+        \langle \phi,c_1\rangle < \alpha < \langle\phi,c_2\rangle
+    \end{equation}
+    for all $c_1\in C_1, c_2\in C_2$.
+\end{corollary}
+
+other stuff
+outer description
+
+\subsection{Cones}
+\subsubsection{Definitions}
+The cone is another very important geometric object, although as with the convex set, we define it algebraically.
+\begin{definition}
+    A subset $K\subseteq\bE$ is called a \textbf{cone} if
+    \begin{equation}
+        x\in K, \lambda\in\bR_+\quad\implies\quad \lambda x\in K.
+    \end{equation}
+\end{definition}
+Oftentimes, we may find ourselves focusing on the closed convex cones (c.c.c. for short), which are closer our primary school intuition of a ``pylon-shaped'' cone. As we shall see, these specific cones have many nice properties, however it is important to note that these c.c.c.s are not the only types of cones. Convex cones have a nice characterization:
+\begin{proposition}
+    Let $K\subseteq\bE$ be a cone. Then $K$ is a convex cone if and only if
+    \begin{equation}
+        x, y\in K\quad\implies\quad x+y\in K.
+    \end{equation}
+\end{proposition}
+A convex cone contains all of its conic combinations, which are sums of the form
+\begin{equation}
+    \sum_{i=1}^k\lambda_ix^{(i)}
+\quad\FOR \lambda\in\bR^k_+ \AND x^{(i)}\in K.
+\end{equation}
+Just as with convex sets, the intersection of any family of convex cones is itself a convex cone. Similar to the convex hull, we can define a conical relaxation of a set, or the conic hull:
+\begin{definition}
+    Let $S\subseteq\bE$ be any set. Then the \textbf{conical hull} of $S$, denoted $\cone S$, is the smallest \textit{convex} cone containing $S$.
+\end{definition}
+As with before, we have an elegant theorem for conical hulls:
+\begin{theorem}[Carath\'eodory, 1911]
+    \label{thmcaratheodory2}%
+    Let $S\subseteq\bE^n$. Then the conic hull of $S$ is
+    \begin{equation}
+        \label{thmcaratheodory2eq}
+        \set{\sum_{i=1}^{\mathbf{n}}\lambda_ix^{(i)}}{ \sum_{i=1}^{n}\lambda_i=1, \lambda\in \bR_+^{n}, x^{(i)}\in S}.
+    \end{equation}
+\end{theorem}
+The reason why we care about closed convex cones so much (besides the fact that they are just \textit{so cool}) is because they correspond with \textbf{partial orders} on $\bE$.
+\subsubsection{Partial Orders}
+Certain things cannot be compared to each other\footnote{Apples and oranges is a common example}. In linear algebra, we don't really have a good way to compare two arbitrary vectors. For example, in $\bR^2$, the vectors $(0, 1)$ and $(1, 0)$ are indistinguishable (especially before the choice of a basis). This is a problem in optimization, as we usually ask questions of the form ``minimize \dots'', which inherently requires us to be able to compare stuff together. To remedy this, we look at special relations called \textit{partial orders}. EW Reword this??
+
+PARTIAL ORDER DEFINITION
+
+EXAMPLE: PARTIAL ORDER ON $\bR^n_+$.
+
+EXAMPLE: SEMI DEFINITE CONE
+
+RECESSION/ASYMPTOTIC CONE <- move this smwhere?
+
+TANGENT CONE <- and this
+
+moreau decompositions
+
+\subsubsection{The Dual Cone}
+Blah blah
+\begin{definition}
+    Let $S\subseteq\bE$. Then we can define the \textbf{positive polar cone} of $S$, denoted as $S^+$, as
+    \begin{equation}
+        S^+:=\set{\phi\in\bE}{\langle x,\phi\rangle\ge 0,\forall x\in S}.
+    \end{equation}
+\end{definition}
+We can define the \textbf{negative polar cone} $S^\circ $ similarly, and $S^\circ=-S^+$. Note that the positive polar cone is sometimes referred to as the \textit{dual cone}, denoted as $S^*$, and the negative polar cone is simply called the \textit{polar cone}.
+
+Insert graphic representing dual cone
+
+The dual cone comes up surprisingly often, as it represents I DON'T KNOW... FIGURE THIS OUT. One fact that comes up a lot is the following:
+\begin{proposition}
+    \label{prpccciffselfdual}
+    Let $K\subseteq\bE$. Then $K$ is a closed convex cone if and only if
+    \begin{equation}
+        K=(K^+)^+.
+    \end{equation}
+\end{proposition}
+Proposition \ref{prpccciffselfdual} can be used to provide a geometric interpretation/proof of the famous Farkas' Lemma from linear programming:
+\begin{corollary}[Farkas' Lemma]
+    Let $A\in\bR^{n\times m}, b\in\bR^n$. Then exactly one of the following is true:
+    \begin{enumerate}[label=(\roman*)]
+        \item The system $Ax=b, x\ge 0$ has a solution
+        \item The system $A^\top y\ge 0, b^\top y<0$ has a solution
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+Hi
+\end{proof}
+Farkas' lemma and other such \textit{theorems of the alternative} are the foundation of a beautiful duality theory in linear programming. It is strongly recommended that the reader be familiar with these ideas.
+\section{Convex Functions}
+\subsection{Preliminary Definitions}
+We've seen many examples of the importance and elegance of convex sets. As we shall see, there is a very natural correspondence between convex sets and convex functions, which will allow us to transfer much of the theory over. In particular, we will be able to derive several properties which are crucial to the success of convex optimization.
+
+The general definition of a convex function is usually introduced in freshman calculus, and is defined by Jensen's Inequality.
+\begin{definition}
+    Let $f:C\to\bR$. Then $f$ is a \textbf{convex function} if $C$ is a convex set and
+    \begin{equation}
+        \label{defcvxfneq}
+        x, y\in C, \lambda\in[0, 1]\quad\implies\quad f((1-\lambda)x+\lambda y)\le (1-\lambda)f(x)+\lambda f(y).
+    \end{equation}
+\end{definition}
+We see that it really is necessary for $C$ to be a convex set, as otherwise the LHS of \ref{defcvxfneq} may not be defined. Pictorially, we define $f$ to be convex if it lies below all of its secant lines.
+
+MAYBE INSERT PICTURES AND EXAMPLES
+
+If we have a function $f$ such that $-f$ is convex, then we call $f$ \textbf{concave}. Concave functions satisfy the inequality
+    \begin{equation}
+        \label{defccvfneq}
+        x, y\in C, \lambda\in[0, 1]\quad\implies\quad f((1-\lambda)x+\lambda y)\ge (1-\lambda)f(x)+\lambda f(y).
+    \end{equation}
+We can immediately uncover the relationship between convex sets and convex functions. Recall the following definition:
+\begin{definition}
+    Let $f:S\subseteq\bE\to\bR$ be any function. We define the \textbf{epigraph} of $f$, denoted $\epi f$, by
+    \begin{equation}
+        \epi f=\set{(x, r)\in S\times\bR}{f(x)\le r}.
+    \end{equation}
+\end{definition}
+PICTURE? The epigraph represents the region ``above'' the graph of $f$, and is a subset of a Euclidean space of one dimension higher. Then we have the following equivalence:
+\begin{proposition}
+    Let $f:S\to\bR$. Then the following are equivalent:
+    \begin{enumerate}[label=(\roman*)]
+        \item $f$ is a convex function
+        \item $\epi f$ is a convex set
+    \end{enumerate}
+\end{proposition}
+Examples: lines, quadratics (introduce hessian is psd iff convex), other examples, norms,
+
+As an aside, we'd also like to note that we can recover the classical Jensen's inequality by induction.
+\begin{theorem}[Jensen's Inequality]
+    Let $f:\bE\to\bR$ be a convex function, $x^{(1)},\dots, x^{(k)}\in\bE$ be points in the domain, and $\lambda\in\bR^k$ satisfying $\sum_{i=1}^k\lambda_i=1$ be weights. Then
+    \begin{equation}
+        f\left(\sum_{i=1}^k\lambda_ix^{(i)}\right)\le\sum_{i=1}^k\lambda_if(x^{(i)}).
+    \end{equation}
+\end{theorem}
+We also need several definitions about functions in general. Depending on your calculus/analysis background, you may have seen many of these definitions before. Personally I knew none of these concepts before I took CO 255/463, and if you're in a similar situation I recommend that you spend some time to draw some examples and get a visual intuition.
+
+Many of these definitions don't show up too often, and a surprising amount of it is unnecessary if you're simply looking to apply algorithms\footnote{It may even be tempting to skip this section and hope that it never comes up.}. Nevertheless, they form important tools for us to develop much of the deeper theory in convex analysis.
+\begin{definition}
+    Let $f:\bE\to\bR$ and $r\in\bR$. Then we can define the $r$th \textbf{level set}, denoted $L_r(f)$, as
+    \begin{equation}
+        L_r(f)=\set{x\in\bE}{f(x)=r}.
+    \end{equation}
+    Similarly, we can define the $r$th \textbf{sublevel set} (sometimes called lower level set), denoted as $S_r(f)$, as
+    \begin{equation}
+        S_r(f)=\set{x\in\bE}{f(x)\le r}.
+    \end{equation}
+\end{definition}
+continuous + bounded sublevel sets?
+lower upper semicontinuous
+to understand what these mean geometrically, perhaps its helpful to picture in terms of epigraph
+closed function
+\subsubsection{As a vector space}
+REDO THIS A BIT
+Before we begin, we'd like to modify our definition of function to include a few objects which will simplify future propositions. In particular, we extend the real line by considering the addition of a new point which we call positive infinity\footnote{I'll denote this extended real line as $(-\infty,+\infty]$, but other authors may use $\bR\sqcup\{+\infty\}$ or other more concise notation. We'll try to avoid doing arithmetic with positive infinity; it's enough to just assume that $c+\infty, \lambda\cdot \infty$ are both equal to $\infty$ (for $c\in(-\infty,+\infty]$ and $\lambda\in(0,+\infty]$) and all other expressions are undefined.}. This way, the infimum of any subset of the extended real line will be an extended real number.
+\begin{definition}
+\label{defevf}%
+    For any function $\tilde f:C\subseteq\bE\to\bR$ we can define the \textbf{extended value function} $f:\bE\to(-\infty,+\infty]$ by
+    \begin{equation}
+        f(x)=\begin{cases}
+            \tilde f(x)& x\in C\\
+            +\infty & x\not\in C.
+        \end{cases}
+    \end{equation}
+\end{definition}
+For our purposes, we shall always assume that the domain $C$ in Definition \ref{defevf} is a convex set. We'll often want to recover this original domain from our extended function, so we'll adopt the following notation:
+\begin{definition}
+    Let $f:\bE\to(-\infty,+\infty]$ be an extended value function. Then the \textbf{domain} of $f$, denoted $\dom f$, is the set
+    \begin{equation}
+        \dom f:=\set{x\in\bE}{f(x)<\infty}.
+    \end{equation}
+\end{definition}
+\subsubsection{Elementary Properties}
+ maxes are at extreme points, local mins are global mins, tangent line theorems, three slopes,
+\subsection{Other Types of Convexity}
+\subsubsection{Quasiconvexity}
+\subsubsection{Strong Convexity}
+\subsubsection{Strict Convexity}
+\subsubsection{$K$-Convexity}
+
+\subsection{Calculus with Convex Functions}
+\subsubsection{Derivatives}
+locally lipschitz, differentiable nearly everywhere
+\subsubsection{Subdifferentials}
+some more I bet
+\section{Convex Programs}
+minimum vs minimal
+\subsection{The Framework}
+abstract convex program
+
+kkt style convex program
+\subsection{Optimality Conditions}
+Picture this: you are at a bar on a Friday night, you're sitting with a few friends who're tryna vibe to crappy mumble rap, while you yourself are working very hard on a convex optimization problem. A hooded stranger\footnote{Perhaps a UofT student.} notices you, walks up and hands you a napkin with some numbers written on it. He claims that he has found an optimal solution for your problem. How could you quickly verify that he is correct?
+
+Understanding optimality constraints is crucial to designing good algorithms. For one, it is important to know when to stop. Also, by analyzing when and why optimality constraints \textit{fail} to hold, we can discover algorithms. As a stupid example, consider Fermat's Theorem:
+\begin{theorem}[Fermat, 1600's]
+    Let $f:A\to\bR$ be some function, and suppose that $x^*$ is a local extremum for $f$. If $f$ is differentiable at $x^*$, then
+    \begin{equation}\label{thmfermateq}\nabla f(x^*)=0.\end{equation}
+\end{theorem}
+When condition \ref{thmfermateq} is violated, then we have a non-zero gradient and thus a direction for descent/ascent. As we'll see, this leads to gradient descent.
+
+For convex functions we have even stronger conditions. The most important property is this very simple one:
+\begin{theorem}[``Unimodality'']
+    Suppose that $f:\bE\to\bR$ is a convex function, and that $M\subseteq\bE$ is a convex set. Then suppose that $x^*\in M\cap\dom f$ is a local minimizer on $M$, ie., there exists some $\delta>0$ such that
+    \begin{equation}
+        x\in M\cap B(x^*;r)\quad\implies\quad f(x)\ge f(x^*).
+    \end{equation}
+    Then $x^*$ is actually a global minimizer of $f$ on $M$, ie.,
+    \begin{equation}
+        x\in M\quad\implies\quad f(x)\ge f(x^*).
+    \end{equation}
+\end{theorem}
+Most algorithms are only capable of finding local extrema, but in convex optimization, this turns out to be equivalent to finding global extrema. We can use this theorem, as well as some facts about convex functions, to strengthen Fermat's theorem:
+\begin{theorem}
+    \label{thmfirstoptcondition}
+    A point $x^*\in\dom f$ is a global minimizer for $f$ \textit{if and only if} $0\in\partial f(x^*)$.
+\end{theorem}
+Of course, if $x^*\in\sint\dom f$ and $f$ is differentiable at $x^*$, then $\partial f(x^*)=\{\nabla f(x^*)\}$ and we recover Fermat's original theorem. So what happens if $x^*\not\in\sint\dom f$?
+
+Tangent cones, that one condition from homework? Rockafeller pshenichnyi
+
+Weierstrauss Theorem    
+
+Lagrange Multipliers - introduce it math 247 style and say we'll talk more about it with duality
+
+Maximizing convex functions
+\subsection{Duality}
+Duality, as a concept, is loosely defined as looking at an object in two ways. For example, we can analyze a signal with respect to either the frequency domain or the time domain. A compact convex set can be regarded by the union of a bunch of points (REFERENCE ABOVE), or the intersection of a bunch of halfspaces (REFERENCE ABOVE). Here, we'll define several different notions of duality to help us understand convex functions and convex programs.
+\subsubsection{Minimax Theorem}
+We begin by borrowing a theorem from game theory, which formalizes the first move disadvantage in many zero-sum games.
+\begin{proposition}
+    \label{prpweakduality}
+    For any $g:M\times N\to\bR$,
+    \begin{equation}
+    \label{prpweakdualityeq}
+        \min_{x\in M}\max_{y\in N} g(x,y)\ge \max_{y\in N}\min_{x\in M} g(x,y).
+    \end{equation}
+\end{proposition}
+Picture a zero-sum game played between two opponents $X$ (Xavier) and $Y$ (say, Yvette), where $g$ is the profit function for $Y$. That is, if $X$ plays the move $x$ and $Y$ plays the move $y$, then $g(x,y)$ is the (possibly negative) money paid out to $Y$ from $X$. Player $Y$ seeks to maximize her profit, while player $X$ seeks to minimize his losses. There is a first player disadvantage in this game: the first player to commit is worse off, as the second player can adapt their strategy in response.
+
+\begin{example}[Rock Paper Scissors]
+    Alphonse and Beryl are playing a game of rock paper scissors, in which the loser pays the winner one Canadian Peso. From Beryl's perspective (Beryl takes the role of $Y$ above), she has the following payoff matrix:
+    \begin{equation}
+        G=\begin{tabular}{|c|ccc|}
+            \hline
+                \backslashbox{A}{B}&Rock&Paper&Scissors\\\hline 
+                Rock & 0 & -1 & 1 \\
+                Paper & 1 & 0 & -1 \\
+                Scissors & -1 & 1 & 0\\\hline
+            \end{tabular}
+    \end{equation}
+    Alphonse and Beryl must both choose a vector from the set:
+    \begin{equation}
+        M=N=\left\{\begin{bmatrix} 1\\ 0\\ 0\end{bmatrix},
+        \begin{bmatrix} 0\\ 1\\ 0\end{bmatrix},
+        \begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right\},
+    \end{equation}
+    and if Alphonse chooses $x$ and Beryl chooses $y$, the payout for Beryl is
+    \begin{equation}
+        g(x,y)=x^\top Gy.
+    \end{equation}
+    By Theorem \ref{prpweakduality} (as well as common sense), the first person to reveal their choice is significantly disadvantaged (since the other person would just pick a winning match-up), and we can compute
+    \begin{equation}
+        1=\min_{x\in M}\max_{y\in N} x^\top Gy\ge \max_{y\in N}\min_{x\in M} x^\top Gy=-1,
+    \end{equation}
+    so we can verify that Inequality \ref{prpweakdualityeq} holds.
+\end{example}
+
+We can interpret this game theoretic perspective as some sort of duality. By defining  $F(x)=\max_{y\in N}g(x,y)$ as a sort of ``dual objective function" to $f(x)=\min_{x\in M} g(x,y)$ (ie., your opponent's objective function is the dual of your own), we can see that Proposition \ref{prpweakduality} resembles some sort of weak duality statement \`a la linear programming.
+
+Remarkably, however, sometimes it \textit{doesn't matter} who goes first: with optimal play, the disadvantage of revealing your plan early is nonexistent. John von Neumann was the first to publish a strong duality minimax theorem, which many regard as the start of game theory.
+\begin{theorem}[von Neumann, 1928, slightly modified]
+    Let $M$ and $N$ be compact convex sets, and $g:M\times N\to\bR$ be a continuous function satisfying
+    \begin{enumerate}[label=(\roman*)]
+        \item $g(\cdot, y):M\to\bR$ is convex for a fixed $y\in N$
+        \item $g(x, \cdot):N\to\bR$ is concave for a fixed $x\in M$.
+    \end{enumerate}
+    \vspace{0.8\baselineskip}Then
+    \begin{equation}
+        \min_{x\in M}\max_{y\in N} g(x,y)= \max_{y\in N}\min_{x\in M} g(x,y).
+    \end{equation}
+\end{theorem}
+There have been many generalizations of von Neumann's minimax theorem. We shall prove one of the same flavour by American/Canadian mathematician Maurice Sion:
+\begin{theorem}[Sion, 1958]
+    \label{thmsion}
+    Let $M$ and $N$ be convex sets, with at least one of them compact, and $g:M\times N\to\bR$ be a l.s.c. quasi-convex function in $x\in M$, and an u.s.c. quasi-concave function on $y\in N$. Then
+    \begin{equation}
+        \label{thmsioneq}
+        \min_{x\in M}\max_{y\in N} g(x,y)= \max_{y\in N}\min_{x\in M} g(x,y).
+    \end{equation}
+\end{theorem}
+Before we prove this theorem, it's important to note that \ref{thmsioneq} may no longer hold if any of the preconditions are false. Let's look at a few case studies with $g(x,y)=x+y$.
+\begin{example}
+    Sometimes, the second to play gains \textit{a lot}! Consider
+    \begin{equation}
+        \min_{x\in\bR}\max_{y\in\bR} x+y=+\infty
+    \end{equation}
+    while
+    \begin{equation}
+        \max_{y\in\bR}\min_{x\in\bR} x+y=-\infty
+    \end{equation}
+    This example also illustrates the necessity of the \textit{compact} condition in Theorem \ref{thmsion}.
+\end{example}
+\begin{example}
+    On the other hand, if we do enforce compactness, then Sion's Theorem holds as we'd expect:
+    \begin{equation}
+        \min_{x\in\bR}\max_{0\le y\le 1} x+y=-\infty.
+    \end{equation}
+\end{example}
+\begin{example}
+    Some commentary on how Sion's Theorem is not necessary GOES HERE
+    \begin{equation}
+        \min_{x\in\bR}\max_{y\le 0} x+y=-\infty.
+    \end{equation}
+    We don't have compactness in either set, but Sion's Theorem still holds.
+\end{example}
+\begin{example}[von Neumann's Zero Sum Game]
+    Alphonse and Beryl realize that they should play according to a probability distribution, etc., etc., generalize. Let $\Delta_n$ be the standard simplex in $\bR^n$, then $x, y$ represent the probability distributions, etc., represent something called a mixed strategy.
+    \begin{equation}
+         \min_{x\in\Delta_m}\max_{y\in\Delta_n} x^\top Ay=\max_{y\in\Delta_n}\min_{x\in\Delta_m} x^\top Ay.
+    \end{equation}
+\end{example}
+\subsubsection{Lagrangian Duality}
+We can use some of the convexity theory to generalize the theory of Lagrange multipliers. INTRODUCE LAGRANGE MULTIPLIERS HERE or above.
+
+Now consider a non-linear program (NLP) given in standard form:
+\begin{equation}
+    \label{eqpbnlpld}
+    \begin{array}{ccc}
+         p^*=&\min & f(x)  \\
+         &\tst & g(x)\preceq_K 0\in\bE^m\\
+          &    & h(x)=0\in\bE^p\\
+           &   & x\in\Omega.
+    \end{array}
+\end{equation}
+\begin{definition}
+In this framework, we can define the \textbf{Lagrangian function} with
+\begin{equation}
+    \cL(x,\lambda,\mu):=f(x)+\langle \lambda, g(x)\rangle+\langle\mu, h(x)\rangle.
+\end{equation}
+\end{definition}
+Here, we introduce two new parameters $\lambda$ and $\mu$, often called the \textbf{dual variables} (as they will become the variables in our dual program), or sometimes simply the Lagrange multipliers. If we are working in $\bR^n$, we usually write the more familiar form
+\begin{equation}
+    \cL(x,\lambda,\mu)=f(x)+\sum_{i=1}^m\lambda_ig_i(x)+\sum_{i=1}^p\mu_ih_i(x),
+\end{equation}
+although it is slightly less revealing. You really should think of the Lagrangian as an affine functional of $\lambda$ and $\mu$. We can recover our original NLP by solving the following unconstrained problem.
+\begin{equation}
+    p^*=\min_{x\in\Omega}\max_{\substack{\mu\in\bE\\\lambda\succeq_{K^+} 0 }}\cL(x,\lambda,\mu)=f(x)+\langle \lambda, g(x)\rangle+\langle\mu, h(x)\rangle.
+\end{equation}
+You should convince yourself why these problems are equivalent, and in particular, why the Lagrange multipliers guarantees feasibility in (\ref{eqpbnlpld}). By reversing the order of play (by Proposition \ref{prpweakduality}) we immediately get a statement of weak duality:
+\begin{equation}
+    \label{prelimweakduality}
+    p^*\ge d^*=\max_{\substack{\mu\in\bE\\\lambda\succeq_{K^+} 0 }}\min_{x\in\Omega}\cL(x,\lambda,\mu).
+\end{equation}
+Let's rewrite this a bit more succinctly. Define the \textbf{dual functional} of NLP with
+\begin{equation}
+    \phi(\lambda,\mu)=\min_{x\in\Omega}\cL(x,\lambda,\mu).
+\end{equation}
+We rewrite (\ref{prelimweakduality}) and define the dual problem, which will form the basis of \textbf{Lagrange relaxation}.
+\begin{definition}
+    Given a program in the form (\ref{eqpbnlpld}), we can define the \textbf{dual program}
+    \begin{equation}
+        \label{eqlgrngedual}
+        d^*=\max_{\substack{\mu\in\bE\\\lambda\succeq_{K^+} 0 }}\phi(\lambda,\mu).
+    \end{equation}
+    Moreover we have weak duality $p^*\ge d^*$.
+\end{definition}
+What's particularly remarkable is that the function $\phi$ is concave, as it is the pointwise minimum (infimum) of affine functionals. Hence the dual program is \textit{always} a convex problem, even if the primal was not. This \textit{relaxation} of a non-convex problem to a convex one is what we call Lagrange relaxation.
+\begin{remark}
+Every choice of $\lambda\succeq_K0,\mu\in\bE$ in $\phi(\lambda,\mu)$ will give us a lower bound for $p^*$. Even if we cannot solve (\ref{eqlgrngedual}) exactly, the approximate solutions will give us better and better bounds for the primal.
+\end{remark}
+Of course, our lower bounds could be quite terrible. We'll devote the next section to understanding when we have strong duality, and talk about more about constraint qualification and optimality conditions in the next. MAYBE CHANGE THIS
+\subsubsection{Strong duality}
+Now, we need to restrict NLP to the case of a convex program. Recall the abstract convex program (ACP):
+\begin{equation}
+    \label{eqacpld}
+    \begin{array}{ccc}
+         p^*=&\min & f(x)  \\
+         &\tst & g(x)\preceq_K 0\\
+           &   & x\in\Omega.
+    \end{array}
+\end{equation}
+Here, $K$ is a closed convex cone, $\Omega\subseteq\bE$ is a convex set (the domain), $f:\Omega\to\bR$ is a convex function, and $g:\Omega\to\bF$, a $K$-convex function on $\Omega$. Then the Lagrangian of (\ref{eqacpld}) is
+\begin{equation}
+    \cL(x,\lambda,\mu):=f(x)+\langle \lambda, g(x)\rangle
+\end{equation}
+with dual functional 
+\begin{equation}
+    \phi(\lambda)=\min_{x\in\Omega}\cL(x,\lambda),
+\end{equation}
+and weak duality
+\begin{equation}
+    p^*\ge d^*:=\max_{\lambda\succeq_{K^+}0}\phi(\lambda).
+\end{equation}
+\begin{definition}
+    A \textbf{constraint qualification}, CQ, on (ACP) is a condition on the constraints which guarantees the existance of a Lagrange multiplier $\lambda^*\in K^+$ so that we have strong duality. That is, $p^*=d^*$, and the supremum $d^*$ is attained.
+\end{definition}
+We'll explore constraint qualifications for non-convex problems later. For now, with a convex program, we have the very simple Slater's condition.
+\begin{definition}[Slater's condition]
+    Slater's constraint qualification holds when there exists a strictly feasible point, ie., there exists $\widehat x\in\Omega$ so that \begin{equation}
+        g(\widehat x)\prec_K0.
+    \end{equation}
+\end{definition}
+\begin{remark}
+    This is also a reason why we include the domain $\Omega$ in the convex problem. If Slater's CQ fails to hold, then sometimes we can modify the constraints and the set$\Omega$ appropriately to introduce strict feasibility\footnote{This is the idea behind facial reduction. INSERT SOURCES HERE}.
+\end{remark}
+And, as alluded to,
+\begin{theorem}[Strong Duality]
+    Suppose that $p^*$ is finite for (ACP), and that Slater's CQ holds. Then there exists a $\lambda^*\in K^+$ such that
+    \begin{equation}
+        \label{thmslaterstrongdualityeq}
+        p^*=\min_{x\in\Omega} L(x,\lambda^*).
+    \end{equation}
+    In other words, we have strong duality in the sense that $p^*=d^*$, there is no \textit{duality gap}. Moreover, if $x^*$ is optimal in (ACP), then it is optimal in (\ref{thmslaterstrongdualityeq}) as well, and
+    \begin{equation}
+        \langle \lambda^*,g(x^*)\rangle=0,
+    \end{equation}
+    ie., complementary slackness conditions hold.
+\end{theorem}
+\begin{proof}
+...
+\end{proof}
+some commentary about how this strong duality doesn't guarantee attainment, and also of feasibility.
+\begin{theorem}
+    Theorem 5.1.12 in Henry's notes
+\end{theorem}
+\begin{proof}
+    Rockafellar Pschenichnyi
+\end{proof}
+\subsubsection{Optimality Conditions}
+
+Existence of KT vectors, Slater's Condition, KT vector implies compactness which allows us to use Sion's theorem.. kkt conditions, idk
+\subsubsection{Conjugate Duality}
+Also called Fenchel duality?
+\section{Algorithms for Unconstrained Problems}
+Sometimes, as with the equality constrained quadratic problem, it is possible to determine the minimum of a function analytically. When we can't, however, we turn to iterative algorithms. Throughout the next few sections, we shall be trying to solve the unconstrained problem
+\begin{equation}x^*=\arg\min_{x\in\bR^n} f(x),\end{equation}
+where $f$ is real valued and sufficiently smooth\footnote{The definition of smooth may change from section to section.}.
+
+We note that many of these algorithms still converge even if $f$ is not convex, however you may find that they do not converge to a global minimum. For now, we'll assume that $f$ is convex as well, but the reader should be aware of the non-convex case.
+
+The following algorithms all follow the same framework. Suppose that we are currently at a point $x^{(n)}\in\bE$, and we would like to iterate towards a new point $x^{(n+1)}$ with the hope that, with enough iterations, $x^{(n)}\to x^*$. For notation's sake, we write $\overline x:=x^{(n)}$ as our current feasible point.
+\subsection{First Order Methods}
+The simplest\footnote{and slowest to converge, although still very useful!} methods are the first order methods---the methods where we move from point to point by considering only information from the first derivative. However, there has been a fair bit of research into improving these methods, especially with the recent popularity of deep learning. Due to the size of some of the problems, the more sophisticated methods are infeasible\footnote{For now! Hopefully this changes in the future.}. Still, first order methods kind of suck and converge very slowly.
+\subsubsection{Steepest Descent}
+The first first-order method was originally proposed by Cauchy in 1847. However despite its age, \textbf{Cauchy's steepest descent} illustrates many of the design considerations to be aware of today. 
+
+The idea is simple. Locally, around $x^{(n)}$, we know that $f$ is quite well approximated by a linear function. If we picked a direction $d$, then we could write
+\begin{equation}
+    g(t):=f(\ox+td)=f(\ox)+\nabla f(\ox)^\top d+o(\norm{td}).
+\end{equation}
+There are two immediate questions we need to answer: what choice of $t$ (called the step size) and what choice of $d$ (called the descent direction) do we want?
+
+Cauchy suggested that we should choose the direction on which $f$ decreases the fastest, the \textit{steepest} direction, so to speak. In other words, we would like to minimize the directional derivative $\nabla f(\ox)^\top d$. To do this, we'd like to solve the subproblem:
+\begin{equation}
+    \begin{array}{cc}
+         \min & \nabla f(\ox)^\top d \\
+         \mathrm{s.t.} & \norm d^2=1.
+    \end{array}
+\end{equation}
+We pass constraint qualification, so we can use Lagrange multipliers. The Lagrangian is
+\begin{equation}
+    \cL(d,\lambda)=\nabla f(\ox)^\top d+\lambda(1-\norm d^2),
+\end{equation}
+with derivative (with respect to $d$)
+\begin{equation}
+    0=\nabla\cL(d,\lambda)=\nabla f(\ox) - 2\lambda d.
+\end{equation}
+If $\nabla f(\ox)=0$ then by Theorem \ref{thmfirstoptcondition} $\ox$ would be a local optimum, and we'd be done. Otherwise $\nabla f(\ox)\neq 0$, and we can solve the system of equation to conclude
+\begin{equation}
+    \lambda=\pm\frac12\norm{\nabla f(\ox)},\qquad d=\pm\frac{\nabla f(\ox)}{\norm {f(\ox)}}.
+\end{equation}
+We are looking to minimize, so we conclude that $d=-\frac{\nabla f(\ox)}{\norm f(\ox)}$ is the direction of steepest descent. Now we must decide on a suitable step length $t$ to guarantee convergence.
+
+Beware of skiing - have an example which shows why its not always the best choice to go to the minimum of $g$
+\subsubsection{Subgradient Methods}
+Ur function is not differentiable :(
+\subsection{Second Order Methods}
+\subsubsection{Newton's Method}
+\subsubsection{Trust Region Methods}
+\section{Equality constrained minimization}
+\subsection{Equality Constrained Quadratic Programs}
+We have already developed enough blah to solve quadratic programs analytically
+\subsection{Newton's Method Revisited}
+\subsection{Infeasible Start Newton's Method}
+\subsection{Penalty Function}
+\subsection{Implementation Details}
+\section{Interior Point Methods}
+Technically speaking, the algorithms we've covered above (steepest descent, second order, etc) are interior point methods, as they travel through the interior of a feasible set rather than along the boundary. However the term interior point method typically refers to a class of algorithms called primal-dual interior point methods\footnote{Which again is a misnomer because some methods are primal or dual only.}. We shall develop these algorithms in this section, first in the general context of non-linear programs, and then after looking at the specific cases of linear and quadratic programs, we shall try to extend to the case of an abstract convex program.
+
+We'll work towards solving convex problems with inequality constraints over an affine manifold,
+\begin{equation}
+    p^*=\begin{array}{cc}
+         \min & f(x)  \\
+         \tst & g(x)\le 0\\
+              & Ax=b\\
+              & x\in\Omega.
+    \end{array}
+\end{equation}
+but along the way we will develop ideas applicable for the general nonlinear program.
+
+We'll begin by discussing methods to convert a constrained optimization problem into a series of unconstrained problems. We'll doing by modifying our objective function to reward feasibility, by either adding a high cost to infeasibility or when approaching the boundary of the feasible region.
+\subsection{Penalty and Barrier problems}
+We present a simple and surprisingly powerful technique for solving general nonlinear problems. Suppose we are given a NLP of the form:
+\begin{equation}
+    \label{eqpbnlp}
+    p^*=\begin{array}{cc}
+         \min & f(x)  \\
+         \tst & g(x)\ge 0\\
+              & h(x)=0\\
+              & x\in\Omega.
+    \end{array}
+\end{equation}
+Here, $f:\bR^n\to\bR, g:\bR^n\to\bR^{m_e}, h:\bR^n\to\bR^{m_i}$ are \textit{any} functions (well, sufficiently smooth), and $\Omega$ is any simple enough constraint set. Note that we make no convex assumptions. We'd like to reformulate this problem into an equivalent unconstrained optimization problem in the hopes of applying Newton's method. Our first try will be to throw a brick at it.
+
+USE THE INDICATOR FUNCTION, maybe some pictures
+
+Unfortunately, the indicator function is not differentiable, which will be a problem when we try to apply Newton's method. We'll have to introduce soft approximations of these indicator functions instead.
+
+INTRODUCE PENALTY BARRIER? SPLIT UP EQUALITY AND INEQUALITY CONSTRAINTS
+
+Then we can define the \textbf{joint penalty-barrier function}
+\begin{equation}
+    P_\mu(x):=f(x)+\frac1{2\mu}\norm{h(x)}^2-\mu\left(\sum_i\log g_i(x)\right).
+\end{equation}
+Here, the second term is called the \textbf{quadratic penalty} term, and the third term is called the \textbf{log barrier} term. We notice that $P_\mu(x)$ is only defined on the interior of the feasible set (points satisfying $g(x)>0$). So if we start at an interior point, then successive iterations will also be at interior points (hence the name interior point method). Consider the corresponding optimization problem
+\begin{equation}
+    \label{eqpenaltybarrierproblem}
+    x_\mu=\arg\min_{g(x)>0,x\in\Omega}P_\mu(x),
+\end{equation}
+we can see that the quadratic penalty term encourages feasibility of the equality constraints, while the log barrier term encourages us to stay away from the boundary of the set. As $\mu$ decreases to $0$, the penalty increases and forces $h(x)=0$, and the barrier decreases and allows the $g(x)$ to get closer to the boundary, while increasing the influence of the objective function $f$. Formally,
+\begin{theorem}[Penalty Barrier Global Convergence]
+    Let $\{\mu_k\}_{k\ge1}$ be a sequence approaching $0$ from above, and $x_{\mu_k}$ be the corresponding optimal solution to (\ref{eqpenaltybarrierproblem}). Then every limit point $x^*$ of the sequence $\{x_{\mu_k}\}_{k\ge1}$ is a solution to (\ref{eqpbnlp}).
+\end{theorem}
+
+\begin{exercise}
+The log barrier is just one of many barrier functions we could have chosen in REFERENCE. Consider blah
+\begin{equation}
+    ...f(x)??- \sum_{j=1}^p\frac1{g_j(x)}
+\end{equation}
+\end{exercise}
+\subsection{Barrier Methods}
+We know how to can convert constrained optimization problems to unconstrained ones. Now, we shall adapt the algorithms we've developed for unconstrained optimization to these new barrier problems. Given our convergence above, it may be tempting to just pick a very small $\mu$ and solve the corresponding barrier subproblem,
+\begin{equation}
+    \min_x P_\mu(x)=f(x)+\frac1{2\mu}\norm{h(x)}^2-\mu\left(\sum_i\log g_i(x)\right),
+\end{equation}
+as an unconstrained optimization problem. While in theory we do have convergence to within an $\varepsilon$ of the optimal value, in practice due to numerical issues it does not work well except for small problems, and only to a moderate accuracy.
+
+So we will need to extend our unconstrained optimization algorithms in a more intelligent manner. These adaptations are generally called \textit{barrier methods}.
+\subsection{Primal-dual interior-point Methods}
+Now let's try to apply our convexity theory to the barrier methods. By using information from both the primal and dual problems to simultaneously update the primal and dual variables at every iteration, we can observe faster convergence than barrier methods. The search directions we obtain are very similar to those obtained in the barrier method, but not identical.
+
+For many basic classes of problems, including linear, quadratic, semidefinite, etc., primal-dual interior-point methods outperform barrier methods. For more complicated/general convex problems, primal-dual algorithms are still under active research, but we have high hopes.
+\subsection{Linear and Semidefinite Programs}
+Let's do a few examples, beginning with linear programming. The first primal-dual interior-point methods are usually credited to Karmakar (1984), (CITATION NEEDED), however barrier methods have been known since the 1950's. 
+
+In contrast with the ellipsoid method ADD SECtION ON THIS?, interior point methods lead to efficient polynomial-time algorithms competitive (and in some cases faster than) the celebrated simplex method. In some sense it combines the best of both algorithms: the theoretical guarantees of the ellipsoid method and the blazing fast real-world performance of the simplex method.
+
+Consider the standard equality form linear program and its dual:
+\begin{equation}
+    \begin{array}{cc}
+         \min & c^\top x  \\
+         \tst & Ax=b\\
+              & x\ge 0,
+    \end{array}\qquad\qquad
+    \begin{array}{cc}
+         \max & b^\top y  \\
+         \tst & A^\top y\le c,\\
+    \end{array}
+\end{equation}
+although we'll usually write the dual in terms of a slack variable $z$:
+\begin{equation}
+    \begin{array}{cc}
+         \min & c^\top x  \\
+         \tst & Ax=b\\
+              & x\ge 0,
+    \end{array}\qquad\qquad
+    \begin{array}{cc}
+         \max & b^\top y  \\
+         \tst & A^\top y+z= c\\
+              & z\ge 0.
+    \end{array}
+\end{equation}
+From a high level perspective: the interior point method will generate a sequence of strictly feasible points $x^{(i)}, y^{(i)}, z^{(i)}$ where $x^{(i)}>0, y^{(i)}>0$, converging to the optimal solution (these points are in the \textit{interior} of the feasible region, hence the name of the algorithm). In practice, we can get within $10^{-8}$ of the optimal solution after 10-50 (expensive) iterations. In fact, we shall show that just $O( n\log{\frac1\varepsilon})$ iterations are enough for $(1+\varepsilon)$ of the optimal value (actually interior-point algorithms with just $O(\sqrt{n}\log{\frac1\varepsilon})$ iterations are enough, but they are slower in practice.
+
+For now, suppose that we only have the primal problem (we shall derive the dual and slack variables along the way):
+\begin{equation}
+    \begin{array}{cc}
+         \min & c^\top x  \\
+         \tst & Ax=b\\
+              & x\ge 0.
+    \end{array}
+\end{equation}
+We eliminate the non-negativity constraints by introducing a barrier function. Letting $\mu>0$ be the barrier parameter, we can formulate the barrier subproblem,
+\begin{equation}
+    \min_{x\in\bR^n_+} c^\top x-\mu\sum_{i=1}^n\log x_i \text{ subject to: } Ax=b,
+\end{equation}
+and corresponding Lagrangian function
+\begin{equation}
+    \cL(x,y)= c^\top x-\mu\sum_{i=1}^n\log x_i-y^\top(Ax-b).
+\end{equation}
+By Theorem CITE THEOREM??, we pass constraint qualification, and so at the optimal solution $x$ there exists a $y$ satisfying the following KKT conditions:
+\begin{align}
+    \label{kktperturbedcsc}
+    A^\top y+\mu X^{-1}e&=c\\
+    Ax&=b.
+\end{align}
+Here, $X=\diag(x)$, and so on. We notice by slightly rearranging (\ref{kktperturbedcsc}) we obtain the perturbed complementary slackness conditions,
+\begin{equation}
+    \quad (A^\top y-c)_i\cdot x_i=\mu,
+\end{equation}
+for all $i\in[n]$ (resembling the complementary slackness conditions we are used to with linear programs, except with $\mu$ on the RHS instead of $0$).
+
+Let's call $z:=c-A^\top y$. Rearranging the KKT equations a bit, we get the perturbed optimality equations
+\begin{align}
+        A^\top y+z-c&=0, z>0 &&\text{(dual feasibility)}\\
+        Ax-b&=0, x>0 && \text{(primal feasibility)}\\
+        Zx-\mu e&=0. && \text{(perturbed complementary slackness)}
+\end{align}
+We denote these conditions as $F_\mu(x,y,z)=0$. Of course, at our current location, if we're not optimal we have $F_\mu(x,y,z)\neq 0$, so we'd like to take a Newton step towards the root. We can find this Newton search direction by solving the equation $\nabla F_\mu(x,y,z)(\Delta x, \Delta y, \Delta z)=-F_\mu(x,y,z)$, or in block equation form,
+\begin{equation}
+    \label{eqperturbedkktlp}
+    \begin{bmatrix}
+     0&A^\top&I\\A&0&0\\Z&0&X
+    \end{bmatrix}
+    \begin{bmatrix}
+        \Delta x\\\Delta y\\\Delta z
+    \end{bmatrix}
+    =-\begin{bmatrix}
+        A^\top+z-c\\Ax-b\\Zx-\mu e
+    \end{bmatrix}.
+\end{equation}
+By solving this system we obtain directions $\Delta x, \Delta y, \Delta z$ of descent. After taking an appropriate step size to remain strictly feasible, we update our points $x, y, z$. Finally, we update $\mu$, usually by setting $\mu\gets\sigma\mu$ for some fixed $\sigma\in(0,1)$, and push the solution towards optimality.
+
+INSERT PSEUDOCODE?
+
+This is the general idea of the algorithm. There are a few details that we have yet to take care of. Over the next few paragraphs, we'll briefly comment on: what to choose for initial values for $x, y, z, \mu$; what step size to take when updating $x, y, z$; and how to solve (\ref{eqperturbedkktlp}) relatively efficiently in practice. More detailed analysis will be attached in following sections.
+
+While in theory we could just pick any strictly feasible $x$ and $z$ (that is $x, z>0$), in practice there are heuristics to follow when choosing initial feasible points (not too close to boundary, etc). However for LPs it tends to work okay. Choosing good initial values for $x, y, z$ is very important, and in general is a hard problem. In non-linear programs, it is difficult to even find strictly feasible solutions. We'll discuss this more when we talk about two phase interior point methods.
+
+When possible, the best possible choice for $x$ is at the optimal solution.
+
+Picking appropriate step sizes $\alpha$ and $\sigma$ is much easier. Again, there are lots of heuristics to follow, and careful tuning of these parameters lead to faster algorithms, however the most important thing is to make sure you remain feasible at each step.
+
+Finally, I'd like to devote a bit of time to exploring how we can efficiently solve (\ref{eqperturbedkktlp}). Letting $r_d=A^\top y+z-c, r_p= Ax-b,$ and $r_c=Zx-\mu e$ be the RHS, we can perform some block gaussian elimination. The first row yields
+\begin{equation}
+    \Delta z=-r_d-A^\top\Delta y,
+\end{equation}
+which when substituted into the third row gives us
+\begin{equation}
+    \Delta x=-Z^{-1}r_c+Z^{-1}Xr_d+Z^{-1}XA^\top\Delta y.
+\end{equation}
+Finally substituting this into the second equation will give us a system
+\begin{equation}
+    AZ^{-1}XA^\top\Delta y=\text{FILL THIS IN}.
+\end{equation}
+Hence we've reduced our $2n+m$ variable system to one with just $m$ unknowns (and usually $m<<n$) and a HERMITIAN LHS????? WHO KNOWS, and we can recover $\Delta x, \Delta z$ by back substitution. (When these algorithms are actually implemented there are more tricks we can do).
+
+In comparison to the simplex, which takes many cheap iterations to converge, primal-dual methods take fewer, more expensive steps. In particular, we need to solve the perturbed KKT equations at each iteration, which is quite computationally expensive. We'll talk more about the time complexity after we choose specifics on the hyperparameters.
+
+\begin{exercise}
+    We can also formulate the barrier subproblem in terms of the dual: FROM CO 463 notes. Can you derive the same perturbed KKT conditions?
+\end{exercise}
+\begin{exercise}
+    The point of this exercise, as well as the three (COUNT?) that follow, will be to derive a primal-dual interior point method for various quadratic optimization problems, starting with
+    \begin{equation}
+    \label{eqqpopt}
+    \begin{array}{cc}
+         \min & q(x)=\frac12x^\top Qx +c^\top x \\
+         \tst & Ax=b\in\bR^m\\
+              & x\ge 0, x\in\bR^n.
+    \end{array}
+    \end{equation}
+    Here we are optimizing over an affine manifold, with an additional non-negativity constraint. Derive a primal-dual interior-point algorithm to solve (\ref{eqqpopt}), by first adding an appropriate log-barrier term, writing down the perturbed optimality conditions, and computing a Newton direction and suitable step length towards optimality.
+    
+    Implement your solution in your favourite scientific programming language. How fast can you make it?
+\end{exercise}
+\begin{exercise}
+    generalized trust region subproblem
+\end{exercise}
+\subsection{Feasibility and Two Phase Methods}
+how to get feasible start point
+\subsection{Step Size and Time Analysis}
+Short step, long step, predictor-corrector. Include pictures?
+\section{Applications}
+Reorder, maybe pick some of the better ones
+\subsection{Semidefinite Programming}
+\subsubsection{Preliminaries}
+Semidefinite programming has been a speciality of the Waterloo C\&O Department. Semidefinite programs (SDPs) resemble linear programs, except with our variable is taken in the space of positive semidefinite matrices, and the non-negativity constraints are replaced by semidefinite ones.
+
+Although SDPs have been studied since at least the 1940's (under different names), it wasn't until the late 1900's and early 2000's that we had efficient algorithms for solving them. There are many diverse applications of SDPs, and hopefully I'll be able to show you many of them\footnote{Semidefinite programming is usually its own course at Waterloo, although some other schools (Stanford) cover it into a second convex optimization course. As a result this section may be way more in depth than some of the others.}.
+
+We begin with the many equivalent formulations of semidefiniteness:
+\begin{proposition}
+    Let $A\in\bS^n$ be a $n\times n$ real symmetric matrix. The following are equivalent:
+    \begin{enumerate}[label=(\roman*)]
+        \item $A$ is positive semidefinite (p.s.d.), written as $A\succeq 0$ or $A\in\bS_+^n$
+        \item For all $x\in\bR^n$, $\langle x, Ax\rangle\ge0$
+        \item All the eigenvalues of $A$ are real and nonnegative
+        \item All $2^n-1$ principal minors of $A$ are nonnegative
+        \item There exists a (Cholesky) factorization $A=LL^\top$
+        \item There exists a (unique) positive semidefinite square root $A=SS$ ($S\in\bS_+^n$).
+    \end{enumerate}
+\end{proposition}
+Of course, a very similar statement holds if we restrict $A$ to be a positive definite matrix:
+
+\begin{proposition}
+    Let $A\in\bS^n$ be a $n\times n$ real symmetric matrix. The following are equivalent:
+    \begin{enumerate}[label=(\roman*)]
+        \item $A$ is positive definite, written as $A\succ 0$ or $A\in\bS_{++}^n$
+        \item For all $x\in\bR^n$, $x\neq 0\implies \langle x, Ax\rangle>0$
+        \item All the eigenvalues of $A$ are real and positive
+        \item All the leading principal minors of $A$ are positive
+        \item There exists a (Cholesky) factorization $A=LL^\top$, where $L$ is square and nonsingular
+        \item There exists a (unique) positive definite square root $A=SS$ ($S\in\bS_{++}^n$).
+    \end{enumerate}
+\end{proposition}
+Some other linear algebra facts we may use are:
+\begin{proposition}
+    Let $A\in\bS_+^n$ and $T\in\bM^n$ be non-singular. Then the signature (number of positive, negative, and zero eigenvalues) of $A$ and $T^\top AT$ are the same.
+\end{proposition}
+\begin{proposition}[Schur Complement]
+    The following are equivalent (for appropriately sized $A, B, C$)
+    \begin{enumerate}[label=(\roman*)]
+        \item $\begin{bmatrix}
+        A&B\\B^\top& C
+        \end{bmatrix}\succ 0$
+        \item $A\succ 0, C-B^\top A^{-1}B\succ0$
+        \item $C\succ 0, A-B C^{-1}B^\top\succ0$
+    \end{enumerate}
+\end{proposition}
+\subsubsection{Semidefinite Programming}
+Recall the primal linear program in standard equality form:
+\begin{equation}
+    \begin{array}{cc}
+         \min &c^Tx  \\
+         \tst & Ax=b\\
+              & x\ge 0.
+    \end{array}
+\end{equation}
+Let $\cA:\bS^n\to\bE^m$ be a linear transformation, $b\in\bE^m$, and $C\in\bS^n$. Then we can write the primal SDP similarly:
+\vspace{-2\baselineskip}
+\begin{equation}
+    p^*=\begin{array}{cc}
+    &\\&\\
+         \min & \langle C, X\rangle  \\
+         \tst & \cA X=b\\
+              & X\succeq 0.
+    \end{array}
+\end{equation}
+Note that we can write the linear transformation a bit more explicitly, if we'd like:
+\begin{equation}
+    \cA X=\begin{bmatrix}
+        \langle A_1, X\rangle\\
+        \vdots\\
+        \langle A_m, X\rangle\\
+    \end{bmatrix},\qquad A_i\in\bS^n,
+\end{equation}
+where $\cA$ is determined by the covectors $\langle A_i, \cdot\rangle$. We can derive the dual SDP by considering the Lagrangian primal:
+\begin{equation}
+    p^*=\min_{X\succeq 0}\max_y\cL(X,y):=\langle C,X\rangle+y^\top(b-\cA X)
+\end{equation}
+and rewriting to obtain the Lagrangian dual:
+\begin{equation}
+    d^*=\max_y\min_{X\succeq 0}\cL(X,y)=b^\top y+\langle X, C-\cA^*y\rangle.
+\end{equation}
+By weak duality (Proposition \ref{prpweakduality}) we know that $p^*\ge d^*$. How can we determine when strong duality holds?
+\subsection{Least Squares}
+\subsection{Quadratic Programming (and Support Vector Machines)}
+\subsection{Quadratic Assignment Problem}
+\subsection{Max Cut}
+\subsection{Sensor Network Localization}
+\subsection{>Neural Networks?}
+- unfortunately not very sophisticated techniques but deep learning is a meme... Deep learning as a field is somewhat like alchemy was in the 16th century. There is a lot of stuff that seems to work, but we really have no idea why. We begin with momentum, an interesting idea inspired by physics even if it isn't mathematically supported.
+\section{Additional Enrichment}
+\subsection{Convex Optimization on Manifolds}
+\appendix
+\section{Appendix I: Prerequisites}
+\subsection{Linear Algebra}
+Linear algebra is the only field of mathematics which is thoroughly understood\footnote{In the informal sense that we have answers to nearly all the questions we have asked.}. It is a beautiful theory which forms the foundation of mathematics, including of course optimization. As a consequence, it is crucial that you understand it.
+
+I won't go over the basic definitions, I think it's fair to assume that you've taken a first course in linear algebra, and so you know about vector spaces, bases, linear transformations, rank and nullity, range and nullspace (or kernel as I'll call it), and basic properties about eigenvalues and eigenvectors. In particular, it is of vital importance that you think of vectors as abstract coordinate-free objects rather than $n$-tuples of scalars or pointed arrows.
+
+In this appendix, $V$ will be an arbitrary finite dimensional vector space over the real numbers $\bR$, capital letters will represent linear transformations, lower case letters from the earlier part of the alphabet will represent scalars and those from the latter part will represent scalars. I'll pick and choose the relevant parts of linear algebra for optimization. In particular, I will \textit{not} be covering dual spaces, geometry, scalar fields other than $\bR$, and so on. This stuff should really be review, you should definitely take more linear algebra courses if it isn't.
+\subsection{Calculus}
+The world is not linear\footnote{Most unfortunately.}. However, the nonlinear stuff is usually pretty well approximated by the linear stuff, and even better by higher order approximations. We'll formalize this notion and more with ideas from differential\footnote{Integral Calculus doesn't really appear that much, at least at the level of these notes. I do want to write more one day on differential geometry.} calculus, the study of change.
+
+I'll assume that the reader is familiar with many fundamental ideas covered between pre-calculus and freshman differential calculus. You should know and be familiar with the many definitions and characterizations of the real numbers; the epsilon-delta definition of a limit; the definition and properties of the derivative of a function in one variable; the intermediate value and extreme value theorems; the mean value theorem and Taylor's theorem.
+
+I'll cover multivariate differential calculus\footnote{Usually taught in a third calculus class}, as well as bits and pieces of real analysis which we will need.
+\subsubsection{The first derivative}
+Local linear approximations, fenchel differentiation
+\subsubsection{The other derivatives}
+Hessian, Taylor series
+\subsection{Linear Programming}
+Linear programming is not strictly a prerequisite for much of convex optimization. However, the theory of linear programs is a fantastic introduction into the field of optimization, and is beautiful in its own right. I sincerely encourage familiarity in the subject out of interest and the many, many applications.
+\section{Appendix II: Proofs and Sketches}
+Many of the proofs were omitted in the notes, for two reasons. First, a lot of the proofs are easy yet unrevealing, and I feel that including them would not have added much to the subject. Second, I wish to use these notes myself as a theorem reference, and the proofs add a lot of clutter.
+
+However, proofs are still very important. I'm not going to prove all my claims (that is your job as a student) but I'll leave lots of hints and sketches.
+\end{document}
