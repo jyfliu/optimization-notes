@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 
 \usepackage{amssymb}
@@ -253,76 +253,102 @@
 \author{Jeffrey Liu}
 \date{}
 
+\usepackage[pages=some]{background}
+
+\backgroundsetup{
+scale=1,
+color=black,
+opacity=0.9,
+angle=0,
+contents={%
+  \includegraphics[width=\paperwidth,height=\paperheight]{cover.jpg}
+  }%
+}
 \begin{document}
-
+\BgThispage
 \maketitle
-\newpage
+\thispagestyle{empty}
+\clearpage
+\section*{A quick warning...}
+These notes are incomplete and subject to mass reorganization and editing. However chapters 4-6 are fairly readable in its current state, and they are the most important. When I'm done chapter 7 will probably be three times the length of the other chapters, but by the time I finish it will be the most interesting.
+\clearpage
 \hrule
-
 \section*{Foreword}
 Hi, Jeffrey here. Today is St Patrick's Day, 2020, but this year I won't be  drinking my problems away on Ezra. I'm not sure when in the future that you, if anyone, will be reading this, so I'll forgive you if you don't remember that this was the year of the COVID-19 pandemic. My classes were suspended last Friday, and I've spent the better part of the break so far playing video games and watching YouTube\footnote{If my parents or any future professors ever read this, I was also reading lots of textbooks.}.
 
-To keep my sanity over the next couple months, I've also decided to start a collection of notes for some of my more favoured subjects. Of course, I'm still a student, but I hope that these writings will form a strong reference for the CO 463/466/471 trio.
+To keep my sanity over the next couple months, I've also decided to start a collection of notes for some of my more favoured subjects.
 
 Convexity is a beautiful property that lends itself to many powerful results in algebra, analysis, and geometry. Applications have been found in many branches of pure mathematics, engineering, finance, computer science, physics, and of course optimization. I'll be basing these notes off of the extensive literature in the subject, in particular: Boyd and Vandenberghe: \textit{Convex Optimization}; and Wolkowicz's CO 463 course notes\footnote{I'll be following the course notes the closest, but with my own commentary and editorials.}, among others.
 
-In contrast to these sources, however, I'll be exploring the subject from the perspective of an undergraduate, so I'll try my best to motivate.
+In contrast to these sources, however, I'll be exploring the subject from the perspective of a (not exceptionally bright :p) undergraduate, so I'll try my best to motivate. I'll also look to introduce non-convex optimization, especially towards numerical methods and their applications in machine learning.
 
-I hope that these notes will form a brief yet extensive overview of the subject, but I must affirm that these notes do \textbf{not} replace a textbook. In particular, I won't be leaving very many insightful exercises and may leave out many illustrative applications (although I will try my best to include further readings). A quick note: some elementary linear algebra and calculus is expected, although I'll try to have an appendix with some prerequisite theorems.
+I hope that these notes will form a brief yet extensive overview of the subject, perhaps as a companion for a first graduate-level course in convex or nonlinear optimization. Of course, I'm still a student (read: \textbf{I'm not an expert}), so expect room for improvement. A quick note: some elementary linear algebra and calculus is expected, although I'll try to have an appendix with some prerequisite
+theorems.
 
-In any case, enjoy\footnote{Also, special thanks to my CO 463 Professor Henry Wolkowicz, as well as my mom and dad for their continued belief in me.}!
+Enjoy\footnote{I'd like to thank 
+Fabrizio Conti for the brilliant cover photo, retrieved from Unsplash. Hope it helps the reader visualize descent algorithms :). Also, special thanks to my CO 463 Professor Henry Wolkowicz, as well as my mom and dad for their continued belief in me.}!
+\newpage
+\tableofcontents
 \newpage
 \section*{Notation}
-I try to use standard notation. If you are unfamiliar with any of these definitions, please read the appendix.
-\subsection{Sets and Vector Spaces}
-\begin{tabular}{p{1.75cm}p{10cm}}
+I try to use standard notation; anything that may be controversial will be listed here. If you are unfamiliar with any of these definitions, please read the appendix.
+\subsection*{Sets and Vector Spaces}
+\begin{tabular}{p{2cm}p{11.75cm}}
 $\bN$ & The set of non-negative integers $\{0, 1, 2, ...\}$\\
 $[n]$ & The set of integers $\{1, 2, ..., n\}$\\
 $\bZ, \bZ_+, \bZ_{++}$ & The set of integers, resp., the non-negative and positive integers\\
 $\bR, \bR_+, \bR_{++}$ & The set of real numbers, resp., the non-negative and positive reals\\
 $\bR^n$ & The vector space of column vectors with $n$ real entries, together with the standard inner product\\
 $\bE, \bE^n$ & Any Euclidean vector space\footnotemark (finite dimensional real inner product space), resp., of dimension $n$ if specified\\
-$\bM^n$ & The vector space of $n\times n$ square matrices with real entries, together with the Frobenius inner product\\
+$\bM^n$ & The vector space of $n\times n$ square matrices with real entries, together with the Frobenius inner product ($\langle A,B\rangle =\ltr(A^\top B)$)\\
 $\bS_+^n, \bS_{++}^n$ & The subset of $\bM^n$ consisting of positive semidefinite (resp. positive definite) matrices.\\
 \end{tabular}
 \footnotetext{An astute reader may note that all $n$ dimensional Euclidean vector spaces are isomorphic to $\bR^n$, and may ask why we bother distinguishing them. Honestly I think the only reason is so that we can be lazy and always assume $\bR^n$ refers to that specific vector space with the standard inner product.}
 ETC TODO
-\subsection{Vectors}
-\begin{tabular}{p{1.75cm}p{10cm}}
+\subsection*{Vectors and Matrices}
+\begin{tabular}{p{2cm}p{11.75cm}}
 $x^\top$ & The transpose of $x$\\
 $I, I_n$ & The identity matrix (resp. of dimension $n$ if specified)\\
-$x_k$ & The $k$\\
+$x_k$ & The $k$th entry of $x$\\
+$x^{(k)}$ & The $k$th element of a sequence of vectors $\{x^{(k)}\}_{k\ge0}$.\\
+$\diag(x)$, $X$ & The square matrix with $x$ along the main diagonal and zeros everywhere else\\
+$\norm x_p$ & The $\ell_p$-norm of $x$\\
+$\norm x$ & The induced norm of $x$ (square root of inner product)\\
+$e$ & The vector of all $1$'s with dimension implied by context\\
+$e_i$ & The $i$th vector in the standard basis of $\bR^n$\\
 \end{tabular}
-- subseteq
-- inner product
-- norm, $l_p$ norm
-- the $i$th basis vector
-- vector of ones, zeros
-- diag
+\subsection*{Abuse of Notation}
+\begin{tabular}{p{2cm}p{11.75cm}}
+$\min_{x\in\Omega}f(x)$ & The \textit{infimum} of $f(x)$ as $x$ ranges in $\Omega$\\
+$\max_{x\in\Omega}f(x)$ & The \textit{supremum} of $f(x)$ as $x$ ranges in $\Omega$\\
+\end{tabular}
 \newpage
 \section*{Introduction}
-Put some pictures??
+Note: I'll put some pictures here eventually.
 
 Historically, mathematicians have preferred structural results over numerical ones. Greats such as Euler, Gauss, Riemann, etc., have been devoted to the creation of beautiful theories in algebra, analysis, geometry, and number theory. It wasn't until the 20th century and the invention and popularization of the computer did the study of algorithms and computation take off.
 
-Combinatorics and Optimization are two fields which blossomed in this new age. Many computational subfields of combinatorics, including those of graph theory, matroid theory, and polyhedral theory, have only been developed recently. The simplex method, published by Dantzig in 1947 CITATION NEEDED, was the first of many algorithms with promising practicality, and with it came the field of operations research.
+Combinatorics and Optimization are two fields which blossomed in this new age. Many computational subfields of combinatorics, including those of graph theory, matroid theory, and polyhedral theory, have only been developed recently. The simplex method, published by Dantzig in 1947, was the first of many algorithms with promising practicality, and with it came the field of operations research.
 
-Convexity, as a geometric property, has been known since forever. The power of the condition however wasn't realized until the late 1800's when THIS PERSON I FORGET WHO made some sick theorem I FORGET WHAT. Minkowski?? Caratheodory?? Nowadays, convex optimization is used everywhere, including BLAH BLAH
+Convexity, as a geometric property, has been known since antiquity. Properties have been investigated by the likes of Euler and Cauchy, however its true potential wasn't realized until the late 1800's when German mathematician Minkowski was able to apply it to number theory. He and fellow German Brunn developed much of the theory in two and three dimensions. Carath\`eodory, Krein, Milman, and Fenchel, among many others, developed and generalized much of the theory from the turn of the century until about the second world war. By 1970 or so all of the convexity theory we will require has been discovered.
+
+The simplex method was a huge landmark in optimization with remarkable practical efficiency, however no polynomial time variation has ever been found. Collaborations to find a provably polynomial time algorithm lead to the discovery of the ellipsoid method in the 70's. In 1984, Indian Karmarkar proposed the first poly-time interior-point method for linear programming while working for Bell Labs, and non-linear adaptations have been an active field of research since the late 1980's.
+
+Since the 90's, applications have been found in the traditional domains of operations research, and also in engineering (robotics, signal processing, circuit design, \dots); computer science (machine learning), the physical sciences, and finance.
 
 We'll first discuss convex geometry and the natural extension to functions. With this, we'll be able to analyze convex programs and develop optimality constraints. These constraints, when violated, give arise to algorithms. Finally, we'll conclude with as many interesting applications as I could find.
 
-For better flow, I will not prove many of the propositions and theorems unless they are particularly insightful. I'll have an appendix on hints and solutions for some the more tricky proofs
+For better flow, I will not prove many of the propositions and theorems unless they are particularly insightful. My primary intention is for these notes to be a reference to myself, but I'll try my best to be a good teacher (plus I enjoy teaching and hope to do it more often). I'll have an appendix on hints and solutions for some the more tricky proofs.
 
-- you do not need to read these notes in linear order! I'll try to make a prerequisite DAG. So please don't be discouraged like I was and think that you have to read ??? pages of geometry before you even see a convex program. In fact, you may be able to understand many of the algorithms by simply reading their description and googling any definitions you haven't heard of before.
+Oh, one last thing: I'll try to maintain a prerequisite DAG. So please don't be discouraged like I was and think that you have to read two chapters of geometry before you even see an optimization problem. In fact, you may be able to understand many of the algorithms by simply reading their description and googling any definitions you haven't heard of before.
 
-But still, it's really important to know the basics. I'm really sorry that sections 1 and 2 may get a little boring, but we need to learn to walk before we can run.
-THIS PARAGRAPH NOT NEEDED??
+But still, it's really important to know the fundamentals. I'm really sorry that sections 1 and 2 may get a little boring, but we need to learn to walk before we can run.
 \newpage
 \section{Convex Geometry}
 We shall explore the main geometric structures which arise in convex optimization, beginning with, of course, sets.
 \subsection{Convex Sets}
 \subsubsection{Definitions}
-Although some notion of convexity has existed geometrically since at least Archimedes (SOURCE: a short history of convexity), the modern definition of a convex set is actually an algebraic one:
+Although some notion of convexity has existed geometrically since at least Archimedes, the modern definition of a convex set is actually an algebraic one:
 \begin{definition}
     \label{defconvex}%%
     A subset $C\subseteq\bE$ is \textbf{convex} if
@@ -352,13 +378,12 @@ Convexity is an extraordinarily simple condition; many everyday sets can easily 
     \begin{equation}
         P=\set{x\in\bE}{Ax\le b},
     \end{equation}
-    are convex. In particular if $m=1$ then we get the closed halfspace
+    are convex. In particular if $m=1$ then we conclude the closed halfspace
     \begin{equation}
         H=\set{x\in\bE}{\langle\phi, x\rangle \le \alpha}
     \end{equation}
     is convex as well. The open halfspace is also convex, although it is not a polyhedra.
 \end{example}
-We have a few equivalent formulations...
 
 \subsubsection{Operations Preserving Convexity}
 There are several common operations which preserve convexity of a set. We'll be able to use these operations to build increasingly sophisticated sets from the basic examples given above. 
@@ -1003,7 +1028,7 @@ If $\nabla f(\ox)=0$ then by Theorem \ref{thmfirstoptcondition} $\ox$ would be a
 \end{equation}
 We are looking to minimize, so we conclude that $d=-\frac{\nabla f(\ox)}{\norm f(\ox)}$ is the direction of steepest descent. Now we must decide on a suitable step length $t$ to guarantee convergence.
 
-Beware of skiing - have an example which shows why its not always the best choice to go to the minimum of $g$
+Beware of skiing - show what happens if step size is too small or too large, have an example which shows why its not always the best choice to go to the minimum of $g$, 
 \subsubsection{Subgradient Methods}
 Ur function is not differentiable :(
 \subsection{Second Order Methods}
@@ -1075,7 +1100,7 @@ We know how to can convert constrained optimization problems to unconstrained on
 \begin{equation}
     \min_x P_\mu(x)=f(x)+\frac1{2\mu}\norm{h(x)}^2-\mu\left(\sum_i\log g_i(x)\right),
 \end{equation}
-as an unconstrained optimization problem. While in theory we do have convergence to within an $\varepsilon$ of the optimal value, in practice due to numerical issues it does not work well except for small problems, and only to a moderate accuracy.
+as an unconstrained optimization problem. While in theory this will converge to within an $\varepsilon$ of the optimal value, in practice due to numerical issues it does not work well except for small and well-behaved problems, and only to a moderate accuracy.
 
 So we will need to extend our unconstrained optimization algorithms in a more intelligent manner. These adaptations are generally called \textit{barrier methods}.
 \subsection{Primal-dual interior-point Methods}
@@ -1083,9 +1108,9 @@ Now let's try to apply our convexity theory to the barrier methods. By using inf
 
 For many basic classes of problems, including linear, quadratic, semidefinite, etc., primal-dual interior-point methods outperform barrier methods. For more complicated/general convex problems, primal-dual algorithms are still under active research, but we have high hopes.
 \subsection{Linear and Semidefinite Programs}
-Let's do a few examples, beginning with linear programming. The first primal-dual interior-point methods are usually credited to Karmakar (1984), (CITATION NEEDED), however barrier methods have been known since the 1950's. 
+Let's do a few examples, beginning with linear programming. The first primal-dual interior-point methods are usually credited to Karmakar (1984), with their application to linear programming, however barrier methods have been known since the 1950's. 
 
-In contrast with the ellipsoid method ADD SECtION ON THIS?, interior point methods lead to efficient polynomial-time algorithms competitive (and in some cases faster than) the celebrated simplex method. In some sense it combines the best of both algorithms: the theoretical guarantees of the ellipsoid method and the blazing fast real-world performance of the simplex method.
+In contrast with the ellipsoid method ADD SECTION ON THIS?, interior point methods lead to efficient polynomial-time algorithms competitive (and in some cases faster than) the celebrated simplex method. In some sense it combines the best of both algorithms: the theoretical guarantees of the ellipsoid method and the blazing fast real-world performance of the simplex method.
 
 Consider the standard equality form linear program and its dual:
 \begin{equation}
@@ -1112,7 +1137,7 @@ although we'll usually write the dual in terms of a slack variable $z$:
               & z\ge 0.
     \end{array}
 \end{equation}
-From a high level perspective: the interior point method will generate a sequence of strictly feasible points $x^{(i)}, y^{(i)}, z^{(i)}$ where $x^{(i)}>0, y^{(i)}>0$, converging to the optimal solution (these points are in the \textit{interior} of the feasible region, hence the name of the algorithm). In practice, we can get within $10^{-8}$ of the optimal solution after 10-50 (expensive) iterations. In fact, we shall show that just $O( n\log{\frac1\varepsilon})$ iterations are enough for $(1+\varepsilon)$ of the optimal value (actually interior-point algorithms with just $O(\sqrt{n}\log{\frac1\varepsilon})$ iterations are enough, but they are slower in practice.
+From a high level perspective: the interior point method will generate a sequence of strictly feasible points $x^{(i)}, y^{(i)}, z^{(i)}$ where $x^{(i)}>0, y^{(i)}>0$, converging to the optimal solution (these points are in the \textit{interior}\footnote{well, actually relative interior} of the feasible region, hence the name of the algorithm). In practice, we can get within $10^{-8}$ of the optimal solution after 10-50 (expensive) iterations. In fact, we shall show that just $O( n\log{\frac1\varepsilon})$ iterations are enough for $(1+\varepsilon)$ of the optimal value (actually interior-point algorithms with just $O(\sqrt{n}\log{\frac1\varepsilon})$ iterations are enough, but they are slower in practice).
 
 For now, suppose that we only have the primal problem (we shall derive the dual and slack variables along the way):
 \begin{equation}
@@ -1165,6 +1190,8 @@ By solving this system we obtain directions $\Delta x, \Delta y, \Delta z$ of de
 
 INSERT PSEUDOCODE?
 
+Insert picture!!
+
 This is the general idea of the algorithm. There are a few details that we have yet to take care of. Over the next few paragraphs, we'll briefly comment on: what to choose for initial values for $x, y, z, \mu$; what step size to take when updating $x, y, z$; and how to solve (\ref{eqperturbedkktlp}) relatively efficiently in practice. More detailed analysis will be attached in following sections.
 
 While in theory we could just pick any strictly feasible $x$ and $z$ (that is $x, z>0$), in practice there are heuristics to follow when choosing initial feasible points (not too close to boundary, etc). However for LPs it tends to work okay. Choosing good initial values for $x, y, z$ is very important, and in general is a hard problem. In non-linear programs, it is difficult to even find strictly feasible solutions. We'll discuss this more when we talk about two phase interior point methods.
@@ -1185,7 +1212,7 @@ Finally substituting this into the second equation will give us a system
 \begin{equation}
     AZ^{-1}XA^\top\Delta y=\text{FILL THIS IN}.
 \end{equation}
-Hence we've reduced our $2n+m$ variable system to one with just $m$ unknowns (and usually $m<<n$) and a HERMITIAN LHS????? WHO KNOWS, and we can recover $\Delta x, \Delta z$ by back substitution. (When these algorithms are actually implemented there are more tricks we can do).
+Hence we've reduced our $2n+m$ variable system to one with just $m$ unknowns (and usually $m<<n$) and a symmetric LHS , leading to faster numerical methods. We can recover $\Delta x, \Delta z$ by back substitution. (When these algorithms are actually implemented there are more tricks we can do).
 
 In comparison to the simplex, which takes many cheap iterations to converge, primal-dual methods take fewer, more expensive steps. In particular, we need to solve the perturbed KKT equations at each iteration, which is quite computationally expensive. We'll talk more about the time complexity after we choose specifics on the hyperparameters.
 
@@ -1296,6 +1323,8 @@ and rewriting to obtain the Lagrangian dual:
     d^*=\max_y\min_{X\succeq 0}\cL(X,y)=b^\top y+\langle X, C-\cA^*y\rangle.
 \end{equation}
 By weak duality (Proposition \ref{prpweakduality}) we know that $p^*\ge d^*$. How can we determine when strong duality holds?
+
+interior point method
 \subsection{Least Squares}
 \subsection{Quadratic Programming (and Support Vector Machines)}
 \subsection{Quadratic Assignment Problem}
@@ -1308,7 +1337,7 @@ By weak duality (Proposition \ref{prpweakduality}) we know that $p^*\ge d^*$. Ho
 \appendix
 \section{Appendix I: Prerequisites}
 \subsection{Linear Algebra}
-Linear algebra is the only field of mathematics which is thoroughly understood\footnote{In the informal sense that we have answers to nearly all the questions we have asked.}. It is a beautiful theory which forms the foundation of mathematics, including of course optimization. As a consequence, it is crucial that you understand it.
+Linear algebra is the only field of mathematics which is understood\footnote{In the extremely crude sense that we have answers to most of the questions.}. It is a beautiful theory which forms the foundation of mathematics, including of course optimization. As a consequence, it is crucial that you understand it.
 
 I won't go over the basic definitions, I think it's fair to assume that you've taken a first course in linear algebra, and so you know about vector spaces, bases, linear transformations, rank and nullity, range and nullspace (or kernel as I'll call it), and basic properties about eigenvalues and eigenvectors. In particular, it is of vital importance that you think of vectors as abstract coordinate-free objects rather than $n$-tuples of scalars or pointed arrows.
 
