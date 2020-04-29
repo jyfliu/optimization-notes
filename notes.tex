@@ -271,10 +271,14 @@ contents={%
 \clearpage
 \section*{A quick warning...}
 These notes are incomplete and subject to mass reorganization and editing. However chapters 4-6 are fairly readable in its current state, and they are the most important. When I'm done chapter 7 will probably be three times the length of the other chapters, but by the time I finish it will be the most interesting.
+
+\vspace{2cm}
+\noindent
+Also, all credit to Fabrizio Conti for the brilliant cover photo, retrieved from Unsplash. Hope it helps the reader visualize descent algorithms :).
 \clearpage
 \hrule
 \section*{Foreword}
-Hi, Jeffrey here. Today is St Patrick's Day, 2020, but this year I won't be  drinking my problems away on Ezra. I'm not sure when in the future that you, if anyone, will be reading this, so I'll forgive you if you don't remember that this was the year of the COVID-19 pandemic. My classes were suspended last Friday, and I've spent the better part of the break so far playing video games and watching YouTube\footnote{If my parents or any future professors ever read this, I was also reading lots of textbooks.}.
+Hi, Jeffrey here. Today is St Patrick's Day, 2020, but this year I won't be  drinking my problems away on Ezra. I'm not sure when in the future that you, if anyone, will be reading this, so I'll forgive you if you don't remember that this was the year of the COVID-19 pandemic. My classes were suspended last Friday, and I've spent the better part of the break so far playing video games and watching YouTube\footnote{If my parents or any future professors or employers ever read this, I was also reading lots of textbooks.}.
 
 To keep my sanity over the next couple months, I've also decided to start a collection of notes for some of my more favoured subjects.
 
@@ -286,7 +290,7 @@ I hope that these notes will form a brief yet extensive overview of the subject,
 theorems.
 
 Enjoy\footnote{I'd like to thank 
-Fabrizio Conti for the brilliant cover photo, retrieved from Unsplash. Hope it helps the reader visualize descent algorithms :). Also, special thanks to my CO 463 Professor Henry Wolkowicz, as well as my mom and dad for their continued belief in me.}!
+Fabrizio Conti again for the brilliant cover photo, retrieved from Unsplash. Also, special thanks to my CO 463 Professor Henry Wolkowicz, as well as my mom and dad for their continued belief in me.}!
 \newpage
 \tableofcontents
 \newpage
@@ -446,7 +450,7 @@ We can immediately state a beautiful result of the subject.
     \end{equation}
 \end{theorem}
 \begin{proof}
-    We'll show that Carath\'eodory's Theorem follows from linear independence\footnote{Although there is a very nice proof using some linear programming theory which I'll have in the appendix}. Insert proof here.
+    We'll show that Carath\'eodory's Theorem follows from linear independence\footnote{Although there is a very nice proof using linear programming}. Insert proof here.
 \end{proof}
 In other words, \textbf{no matter how misbehaved} $S$ is as a set, any point in the convex hull of $S$ can be written as a convex combination of just $n+1$ points from $S$. This is remarkable, as it will often allow us to simplify arbitrarily many variables into just $n+1$. In fact, if $S$ is sufficiently well behaved, we get an even stronger statement.
 \begin{theorem}[Fenchel and Blunt, YYYY?]
@@ -456,7 +460,9 @@ There are several related theorems that are worth knowing, although they don't a
 \begin{corollary}[A consequence of Carath\'eodory's Theorem]
     The convex hull of a compact set is compact.
 \end{corollary}
-(Beware, however, that the convex hull of a closed set may not be closed. Try to find a counterexample!)
+\begin{exercise}
+    Beware! The compactness condition cannot be weakened: the convex hull of a closed set may not be closed. Try to find a counterexample!
+\end{exercise}
 \begin{theorem}[Helly, YYYY]
     Let $C^{(i)}\subseteq \bE^n, i\in I$ be a (potentially uncountable?) collection of compact convex sets. Then if every subcollection of $n+1$ sets have a non-empty intersection, then
     \begin{equation}
@@ -484,14 +490,36 @@ If we do not restrict $\lambda$ to the interval $[0,1]$ in the definition of con
     x, y\in S, \lambda\in\bR,\quad\implies\quad (1-\lambda)x+\lambda y\in S.\end{equation}
 \end{definition}
 
-translation of a subspace
+Intuitively, just as convex sets contain all of their convex combinations, we'd like an affine set to be one containing all of its affine combinations. However unlike their convex counterparts, affine sets can be characterized extremely simply. 
+\begin{proposition}[Different formulations of affine sets]
+    Let $S\subseteq\bE$. Then the following are equivalent:
+    \begin{enumerate}[label=(\roman*)]
+        \item $S$ is an affine set, in the sense of Definition \ref{defaffine}.
+        \item $S$ is a \textbf{linear manifold}, ie., there exists a linear transformation $\cA:\bE\to\bF$ and vector $b\in\bF$ so that
+        \begin{equation}
+            \label{linearmanifolddefeq}
+            S=\set{x\in\bE}{\cA x=b}.
+        \end{equation}
+        \item There exists some $d\in\bE$ and linear transformation $\cB:\bF\to\bE$ so that
+        \begin{equation}
+            S=\set{x\in\bE}{x=\cB y+d, y\in\bF}.
+        \end{equation}
+        This is sometimes called the \textbf{parametric form} or \textbf{nullspace representation} of $S$.
+        \item $S$ is the translation of a subspace, ie., for $\overline x\in S$ the set $S-\overline x$ is a subspace of $\bE$.
+    \end{enumerate}
+\end{proposition}
+Among these formulations, (\ref{linearmanifolddefeq}) is the most useful, ie., affine sets are the solution sets to some system of linear equations, and the terms \textit{affine set} and \textit{linear manifold} will be used interchangeably.
 
-affinely independent
+However, (iv) inspires us to adapt linear independence to the affine case. 
+
+affinely independence definition goes here, and some basic theorems
+
+These tools form the backbone of what's really happening in our proof of Theorem \ref{thmcaratheodory}.
 
 Dimension, Relative interior
 \subsection{Geometry with Convex Sets}
 \subsubsection{Extreme Points and Faces}
-What is this used for? Idk what facial reduction and stuff is yet..
+What is this used for? facial reduction and stuff... to be added...
 \begin{proposition}
     Let $C\subseteq\bE$ be a convex set. Then $\ext C$ is non-empty if and only if $C$ is pointed, ie., $C$ does not contain any lines.
 \end{proposition}
@@ -548,7 +576,7 @@ Preliminary version:
     \end{equation}
     for all $c\in C$.
 \end{theorem}
-We can think of hyperplane separation as another \textit{Theorem of the Alternative}, in the sense that \textit{either} $x$ is contained inside $C$, or it isn't and we have a hyperplane certificate to prove it. This is the beginning of some of the duality theory we shall develop.
+We can think of hyperplane separation as another \textit{Theorem of the Alternative}, in the sense that \textit{either} $x$ is contained inside $C$, or it isn't and we have a hyperplane certificate to prove it. Spoiler alert: This theorem will prove essential to developing strong duality for convex optimization.
 
 We can immediately generalize Theorem $\ref{thmhyperplanesep}$ where we don't just separating a point from a convex set, but instead separate two convex sets from each other:
 \begin{corollary}
@@ -596,13 +624,34 @@ As with before, we have an elegant theorem for conical hulls:
         \set{\sum_{i=1}^{\mathbf{n}}\lambda_ix^{(i)}}{ \sum_{i=1}^{n}\lambda_i=1, \lambda\in \bR_+^{n}, x^{(i)}\in S}.
     \end{equation}
 \end{theorem}
-The reason why we care about closed convex cones so much (besides the fact that they are just \textit{so cool}) is because they correspond with \textbf{partial orders} on $\bE$.
+The reason why we care about closed convex cones so much (besides the fact that they are just \textit{so cool}) is because they correspond with \textbf{partial orders} on $\bE$. Understanding cone geometry leads to conic optimization (duh), most notably including second-order cone programming and semidefinite programming. We have efficient algorithms for both these problems.
 \subsubsection{Partial Orders}
-Certain things cannot be compared to each other\footnote{Apples and oranges is a common example}. In linear algebra, we don't really have a good way to compare two arbitrary vectors. For example, in $\bR^2$, the vectors $(0, 1)$ and $(1, 0)$ are indistinguishable (especially before the choice of a basis). This is a problem in optimization, as we usually ask questions of the form ``minimize \dots'', which inherently requires us to be able to compare stuff together. To remedy this, we look at special relations called \textit{partial orders}. EW Reword this??
+Many things cannot be compared to each other\footnote{Apples and oranges is a canonical example}. In linear algebra, there really isn't a good way to compare two arbitrary vectors. For example, in $\bR^2$, the vectors $(0, 1)$ and $(1, 0)$ are indistinguishable (especially before the choice of a basis). This appears to be a huge problem in optimization, where questions of the form ``minimize \dots'', inherently requires us to be able to compare stuff to each other. 
+
+However, this is a non-issue, as we introduce the concept of a \textit{partial order}.
 
 PARTIAL ORDER DEFINITION
 
-EXAMPLE: PARTIAL ORDER ON $\bR^n_+$.
+Unlike \textit{total orders}, we are allowed to have pairs of objects $a, b$ which are \textbf{incomparable}, meaning neither $a\preceq b$ or $b\preceq a$.
+
+\begin{example}
+    We are already familiar with a partial order--- the \textit{less than or equal to} relation $\le$ over the real numbers. We can generalize this to obtain a natural partial order in $\bR^n$, where
+    \begin{equation}
+        x\preceq y\quad\iff\quad x_i\le y_i, \forall i\in [n].
+    \end{equation}
+    Essentially we say $x\preceq y$ if every entry of $x$ is less than the corresponding entry of $y$. Usually we won't be too picky with the notation and just write $x\le y$. After messing around with the definition for a bit, a cool alternate formulation is
+    \begin{equation}
+        x\le y\quad\iff\quad y-x\in\bR_+.
+    \end{equation}
+    As it turns out, this is actually a more natural definition for the $\le$ relation\footnote{and it may be familiar if you've done anything with equivalence relations}. In particular, it is (at least on the surface) coordinate free, and it extends easily.
+\end{example}
+\begin{proposition}
+    Indeed, if $K\subset\bE$ is any pointed convex cone, then the relation $x\preceq y$ if and only if $y-x\in K$ is a partial order. Conversely, if $\preceq$ is any partial order then
+    \begin{equation}
+        \set{x\in\bE}{0\preceq x}
+    \end{equation}
+    is a pointed convex cone.
+\end{proposition}
 
 EXAMPLE: SEMI DEFINITE CONE
 
@@ -877,7 +926,7 @@ Before we prove this theorem, it's important to note that \ref{thmsioneq} may no
     \end{equation}
 \end{example}
 \subsubsection{Lagrangian Duality}
-We can use some of the convexity theory to generalize the theory of Lagrange multipliers. INTRODUCE LAGRANGE MULTIPLIERS HERE or above.
+We can use some of the convexity theory to generalize the theory of Lagrange multipliers. (INTRODUCE LAGRANGE MULTIPLIERS somewhere)
 
 Now consider a non-linear program (NLP) given in standard form:
 \begin{equation}
@@ -1034,6 +1083,7 @@ Ur function is not differentiable :(
 \subsection{Second Order Methods}
 \subsubsection{Newton's Method}
 \subsubsection{Trust Region Methods}
+Probably can/should make this its own section below
 \section{Equality constrained minimization}
 \subsection{Equality Constrained Quadratic Programs}
 We have already developed enough blah to solve quadratic programs analytically
@@ -1042,9 +1092,7 @@ We have already developed enough blah to solve quadratic programs analytically
 \subsection{Penalty Function}
 \subsection{Implementation Details}
 \section{Interior Point Methods}
-Technically speaking, the algorithms we've covered above (steepest descent, second order, etc) are interior point methods, as they travel through the interior of a feasible set rather than along the boundary. However the term interior point method typically refers to a class of algorithms called primal-dual interior point methods\footnote{Which again is a misnomer because some methods are primal or dual only.}. We shall develop these algorithms in this section, first in the general context of non-linear programs, and then after looking at the specific cases of linear and quadratic programs, we shall try to extend to the case of an abstract convex program.
-
-We'll work towards solving convex problems with inequality constraints over an affine manifold,
+Technically speaking, the algorithms we've covered above (steepest descent, second order, etc) are interior point methods, as they travel through the interior of a feasible set rather than along the boundary. However the term interior point method typically refers to a class of algorithms called primal-dual interior point methods\footnote{Which again is a misnomer because some methods are primal or dual only.}. We shall develop these algorithms in this section, first in the general context of non-linear programs, and then after looking at the specific cases of linear and quadratic programs, we shall try to extend to the case of an abstract convex problem with inequality constraints over an affine manifold,
 \begin{equation}
     p^*=\begin{array}{cc}
          \min & f(x)  \\
@@ -1053,27 +1101,40 @@ We'll work towards solving convex problems with inequality constraints over an a
               & x\in\Omega.
     \end{array}
 \end{equation}
-but along the way we will develop ideas applicable for the general nonlinear program.
+and develop the relevant ideas along the way.
 
 We'll begin by discussing methods to convert a constrained optimization problem into a series of unconstrained problems. We'll doing by modifying our objective function to reward feasibility, by either adding a high cost to infeasibility or when approaching the boundary of the feasible region.
 \subsection{Penalty and Barrier problems}
 We present a simple and surprisingly powerful technique for solving general nonlinear problems. Suppose we are given a NLP of the form:
 \begin{equation}
     \label{eqpbnlp}
-    p^*=\begin{array}{cc}
-         \min & f(x)  \\
-         \tst & g(x)\ge 0\\
-              & h(x)=0\\
+    \begin{array}{ccc}
+         p^*=\min & f(x)  \\
+         \phantom{p^*=}\tst & g(x)\ge 0\\
+             & h(x)=0\\
               & x\in\Omega.
     \end{array}
 \end{equation}
-Here, $f:\bR^n\to\bR, g:\bR^n\to\bR^{m_e}, h:\bR^n\to\bR^{m_i}$ are \textit{any} functions (well, sufficiently smooth), and $\Omega$ is any simple enough constraint set. Note that we make no convex assumptions. We'd like to reformulate this problem into an equivalent unconstrained optimization problem in the hopes of applying Newton's method. Our first try will be to throw a brick at it.
+Here, $f:\bR^n\to\bR, g:\bR^n\to\bR^{m_e}, h:\bR^n\to\bR^{m_i}$ are \textit{any} functions (well, sufficiently smooth, twice differentiable is usually enough), and $\Omega$ is any simple enough constraint set (for example an affine manifold, or perhaps a polyhedron). Note that we make no convex assumptions. We'd like to reformulate this problem into an equivalent unconstrained optimization problem in the hopes of applying Newton's method. Our first try will be to throw a brick at it.
 
-USE THE INDICATOR FUNCTION, maybe some pictures
+Recall that, for a general set $S\subseteq\bE$, we can define an indicator function $\cI_S:\bE\to\bR\cup\{+\infty\}$ with
+\begin{equation}
+    \cI_S(x)=\begin{cases}
+        0 & x\in S\\
+        +\infty & x\not\in S.
+    \end{cases}
+\end{equation}
+Then if we let
+\begin{equation}
+    \cF = \set{x\in\bR^n}{g(x)\ge 0, h(x) =0}
+\end{equation}
+be the feasible region, then the unconstrained problem
+\begin{equation}
+    p^*=\min_{x\in\Omega} f(x)+\cI_\cF(x)
+\end{equation}
+is equivalent to our original problem. This seems to work out nicely, but unfortunately the gravy train stops here. The indicator function is not continuous, meaning we won't be able to use most of our developed algorithms (subgradient method doesn't work well either, as we are not convex). We'll have to introduce soft approximations of these indicator functions instead.
 
-Unfortunately, the indicator function is not differentiable, which will be a problem when we try to apply Newton's method. We'll have to introduce soft approximations of these indicator functions instead.
-
-INTRODUCE PENALTY BARRIER? SPLIT UP EQUALITY AND INEQUALITY CONSTRAINTS
+INTRODUCE PENALTY BARRIER with pictures. SPLIT UP EQUALITY AND INEQUALITY CONSTRAINTS?
 
 Then we can define the \textbf{joint penalty-barrier function}
 \begin{equation}
@@ -1137,7 +1198,7 @@ although we'll usually write the dual in terms of a slack variable $z$:
               & z\ge 0.
     \end{array}
 \end{equation}
-From a high level perspective: the interior point method will generate a sequence of strictly feasible points $x^{(i)}, y^{(i)}, z^{(i)}$ where $x^{(i)}>0, y^{(i)}>0$, converging to the optimal solution (these points are in the \textit{interior}\footnote{well, actually relative interior} of the feasible region, hence the name of the algorithm). In practice, we can get within $10^{-8}$ of the optimal solution after 10-50 (expensive) iterations. In fact, we shall show that just $O( n\log{\frac1\varepsilon})$ iterations are enough for $(1+\varepsilon)$ of the optimal value (actually interior-point algorithms with just $O(\sqrt{n}\log{\frac1\varepsilon})$ iterations are enough, but they are slower in practice).
+From a high level perspective: the interior point method will generate a sequence of strictly feasible points $x^{(i)}, y^{(i)}, z^{(i)}$ where $x^{(i)}>0, y^{(i)}>0$, converging to the optimal solution (these points are in the \textit{interior}\footnote{well, actually relative interior} of the feasible region, hence the name of the algorithm). In practice, we can get within $10^{-8}$ of the optimal solution after 10-50 (expensive) iterations. In fact, we shall show that just $O( n\log{\frac1\varepsilon})$ iterations are enough for $(1+\varepsilon)$ of the optimal value (actually interior-point algorithms with just $O(\sqrt{n}\log{\frac1\varepsilon})$ iterations exist, but they are slower in practice).
 
 For now, suppose that we only have the primal problem (we shall derive the dual and slack variables along the way):
 \begin{equation}
