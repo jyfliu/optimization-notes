@@ -9,6 +9,7 @@
 \usepackage{amsthm}
 \usepackage{faktor}
 \usepackage{diagbox}
+\usepackage{tikz}
 \DeclareMathAlphabet{\mymathbb}{U}{bbold}{m}{n} 
 \numberwithin{equation}{section}
 
@@ -286,7 +287,7 @@ Convexity is a beautiful property that lends itself to many powerful results in 
 
 In contrast to these sources, however, I'll be exploring the subject from the perspective of a (not exceptionally bright :p) undergraduate, so I'll try my best to motivate. I'll also look to introduce non-convex optimization, especially towards numerical methods and their applications in machine learning.
 
-I hope that these notes will form a brief yet extensive overview of the subject, perhaps as a companion for a first graduate-level course in convex or nonlinear optimization. Of course, I'm still a student (read: \textbf{I'm not an expert}), so expect room for improvement. A quick note: some elementary linear algebra and calculus is expected, although I'll try to have an appendix with some prerequisite
+I hope that these notes will form a brief yet extensive overview of the subject, perhaps as a companion for a first graduate-level course in convex or nonlinear optimization. Of course, I'm still a student, so prepare for the worst. A quick note: some elementary linear algebra and calculus is expected, although I'll try to have an appendix with some prerequisite
 theorems.
 
 Enjoy\footnote{I'd like to thank 
@@ -303,11 +304,10 @@ $[n]$ & The set of integers $\{1, 2, ..., n\}$\\
 $\bZ, \bZ_+, \bZ_{++}$ & The set of integers, resp., the non-negative and positive integers\\
 $\bR, \bR_+, \bR_{++}$ & The set of real numbers, resp., the non-negative and positive reals\\
 $\bR^n$ & The vector space of column vectors with $n$ real entries, together with the standard inner product\\
-$\bE, \bE^n$ & Any Euclidean vector space\footnotemark (finite dimensional real inner product space), resp., of dimension $n$ if specified\\
+$\bE, \bE^n$ & Any Euclidean vector space (finite dimensional real inner product space), resp., of dimension $n$ if specified\\
 $\bM^n$ & The vector space of $n\times n$ square matrices with real entries, together with the Frobenius inner product ($\langle A,B\rangle =\ltr(A^\top B)$)\\
 $\bS_+^n, \bS_{++}^n$ & The subset of $\bM^n$ consisting of positive semidefinite (resp. positive definite) matrices.\\
 \end{tabular}
-\footnotetext{An astute reader may note that all $n$ dimensional Euclidean vector spaces are isomorphic to $\bR^n$, and may ask why we bother distinguishing them. Honestly I think the only reason is so that we can be lazy and always assume $\bR^n$ refers to that specific vector space with the standard inner product.}
 ETC TODO
 \subsection*{Vectors and Matrices}
 \begin{tabular}{p{2cm}p{11.75cm}}
@@ -351,7 +351,6 @@ But still, it's really important to know the fundamentals. I'm really sorry that
 \section{Convex Geometry}
 We shall explore the main geometric structures which arise in convex optimization, beginning with, of course, sets.
 \subsection{Convex Sets}
-\subsubsection{Definitions}
 Although some notion of convexity has existed geometrically since at least Archimedes, the modern definition of a convex set is actually an algebraic one:
 \begin{definition}
     \label{defconvex}%%
@@ -359,20 +358,31 @@ Although some notion of convexity has existed geometrically since at least Archi
     \begin{equation} \label{defconvexeq}%%
     x, y\in C, \lambda\in[0,1],\quad\implies\quad (1-\lambda)x+\lambda y\in C.\end{equation}
 \end{definition}
-We can see that, for a fixed $x\AND y$, the quantity $(1-\lambda)x+\lambda y$ represents the closed line segment between $x$ and $y$ as $\lambda$ ranges over the unit interval. Then Equation \ref{defconvexeq} is equivalent to the statement that the set $S$ contains all of its line segments. There are a couple alternate equivalent formulations of convexity which may (or may not) help you visualize the definition of convexity:
-\begin{proposition}
-    Let $C\subseteq\bE$. Then the following are equivalent:
-    \begin{enumerate}[label=(\roman*)]
-        \item $C$ is convex,
-        \item $C$ contains all of its convex combinations, that is, if $x^{(1)}, \dots, x^{(k)}\in C$ and $\lambda_1, \dots, \lambda_k\in\bR_+$ with $\sum_{i=1}^k\lambda_i=1$, then the \textbf{convex combination}\footnotemark
-        \begin{equation}\sum_{i=1}^k\lambda_ix^{(i)}\end{equation} belongs to $C$ as well.
-        \item The intersection of $C$ with any line is either the empty set or a connected interval.
-        \end{enumerate}
-\end{proposition}
-\footnotetext{This is also called the weighted mean (from physics), and a generalization of barycentric coordinates. You can also think of the $\lambda_i$ as being a probability distribution.}
+We can see that, for a fixed $x\AND y$, the quantity $(1-\lambda)x+\lambda y$ represents the closed line segment between $x$ and $y$ as $\lambda$ ranges over the unit interval. Then Equation \ref{defconvexeq} is equivalent to the statement that the set $S$ contains all of its line segments.
+
 Convexity is an extraordinarily simple condition; many everyday sets can easily be shown to be convex. We'll list a few examples:
 \begin{example}
     The empty set is convex (vacuously).
+\end{example}
+    
+\begin{example}
+    These three sets in $\bR^2$ are all convex. 
+    \begin{center}
+    \begin{tikzpicture}
+    \draw [fill=cyan!20] plot [smooth cycle] coordinates {(-3, 0) (-2.8, -0.3) (-2.4, -0.3) (-2, 0) (-1.8, 0.8) (-1.9, 1.2) (-2.9, 1.1)};
+    \draw plot coordinates {(0, 0) (1, 1)};
+    \draw [fill=cyan!20] plot coordinates {(2.2,-0.3) (3.8,-0.3) (3, 1.07) (2.2,-0.3)};
+    \end{tikzpicture}
+    \end{center}
+    
+    However the following three sets are not, as in each case we can find a line segment between points from the set which is not contained in the set. Note that the third set contains some of its boundary points, but is missing a few and is not convex.
+    \begin{center}
+    \begin{tikzpicture}
+    \draw [fill=cyan!20] plot [smooth cycle] coordinates {(-1.9, 1.25) (-1.69, 0.78) (-1.19, 0.73) (-1.57, 0.39) (-1.46, -0.11) (-1.9, 0.15) (-2.34, -0.11) (-2.23, 0.39) (-2.61, 0.73) (-2.11, 0.78)};
+    \draw (-0.1, 0) parabola (0.9, 1);
+    \draw [fill=cyan!20] plot coordinates {(2.4,0.0464) (2.2,-0.3) (3.8,-0.3) (3, 1.07) (2.8, 1.07-0.3464)};
+    \end{tikzpicture}
+    \end{center}
 \end{example}
 \begin{example}
     All subspaces $S$ of $\bE$ are convex. In addition, translations of subspaces ($S+\overline x$ for some $\overline x\in\bE$) are convex. These translations are called affine sets (more on this later!).
@@ -388,10 +398,19 @@ Convexity is an extraordinarily simple condition; many everyday sets can easily 
     \end{equation}
     is convex as well. The open halfspace is also convex, although it is not a polyhedra.
 \end{example}
-
-\subsubsection{Operations Preserving Convexity}
-There are several common operations which preserve convexity of a set. We'll be able to use these operations to build increasingly sophisticated sets from the basic examples given above. 
-These propositions all follow from definitions, and the reader is encouraged to prove them on their own.
+There are a couple equivalent formulations of convexity which are good to know.
+\begin{proposition}
+    Let $C\subseteq\bE$. Then the following are equivalent:
+    \begin{enumerate}[label=(\roman*)]
+        \item $C$ is convex,
+        \item $C$ contains all of its convex combinations, that is, if $x^{(1)}, \dots, x^{(k)}\in C$ and $\lambda_1, \dots, \lambda_k\in\bR_+$ with $\sum_{i=1}^k\lambda_i=1$, then the \textbf{convex combination}\footnotemark
+        \begin{equation}\sum_{i=1}^k\lambda_ix^{(i)}\end{equation} belongs to $C$ as well.
+        \item The intersection of $C$ with any line is either the empty set or a connected interval.
+        \end{enumerate}
+\end{proposition}
+\footnotetext{This is also called the weighted mean (from physics), and a generalization of barycentric coordinates. You can also think of the $\lambda_i$ as being a probability distribution.}
+Several common set operations preserve the convexity of a set. We'll be able to use these operations to build increasingly sophisticated sets from the basic examples given above. 
+I encourage you to prove these on your own (its easy).
 \begin{proposition}
     \label{propcvxintersection}
     Let $C_i\subseteq\bE, i\in I$ be a collection of convex sets, where $I$ is a (potentially uncountably large) index set. Then the intersection
@@ -420,15 +439,17 @@ In particular, the \textit{convex hull} of a set $S$, possibly defined as the in
     is a convex set as well, for $i\in [m]$.
 \end{proposition}
 \begin{proposition}
-    Let $\cA:\bE^n\to\bE^m$ be an affine mapping. Then if $C\subseteq\bE^n$ and $D\subseteq\bE^m$ are convex sets, both the image $\cA(C)$ and the pre-image $\cA^{-1}(D)$ are convex sets.
+    Let $\cA:\bE^n\to\bE^m$ be an affine mapping, that is, the translation of some linear map $\cL$. Then if $C\subseteq\bE^n$ and $D\subseteq\bE^m$ are convex sets, both the image $\cA(C)$ and the pre-image $\cA^{-1}(D)$ are convex sets.
 \end{proposition}
+
+Finally, recall that we can define the \textit{interior} and \textit{closure} of a set as the largest open subset and smallest closed superset respectively.
 \begin{proposition}
     \label{prpconvexintcl}
     Let $C\subseteq\bE$ be a convex set. Then the interior $\sint C$ and closure $\scl C$ are convex sets as well.
 \end{proposition}
-Actually, we shall see that we can strengthen Proposition \ref{prpconvexintcl} when we define the \textit{relative interior}, in case $C$ has a ``lower dimension'' than $\bE$. But this will come later.
-\subsubsection{Convex Hulls and Carath\'eodory's Theorem}
-Many problems encountered in nature will \textbf{not} be convex (and usually will be difficult to solve), so we'll formulate strategies to relax these problems so that they are convex. The simplest of which is the convex hull.
+In particular, it is the interior that we will be most interested in. Worryingly, some convex sets, for example hyperplanes, may have empty interiors. We shall see that we can strengthen Proposition \ref{prpconvexintcl} when we define the \textit{relative interior}, for the cases that $C$ has a ``lower dimension'' than $\bE$. But this will come later.
+\subsection{Convex Hulls and Carath\'eodory's Theorem}
+Most problems encountered in nature will \textbf{not} be convex (and usually will be difficult to solve), so we'll formulate strategies to relax these problems so that they are convex. The simplest of which is the convex hull.
 \begin{definition}
     Let $S\subseteq\bE$ be \textit{any} set. Then the \textbf{convex hull} of $S$, denoted $\conv S$, is the \textit{smallest convex set containing $S$}. That is, if $C$ is any other convex set containing $S$, then $\conv S\subseteq C$.
 \end{definition}
