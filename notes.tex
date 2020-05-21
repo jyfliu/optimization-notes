@@ -647,13 +647,28 @@ As with before, we have an elegant theorem for conical hulls:
 \end{theorem}
 The reason why we care about closed convex cones so much (besides the fact that they are just \textit{so cool}) is because they correspond with \textbf{partial orders} on $\bE$. Understanding cone geometry leads to conic optimization (duh), most notably including second-order cone programming and semidefinite programming. We have efficient algorithms for both these problems.
 \subsubsection{Partial Orders}
-Many things cannot be compared to each other\footnote{Apples and oranges is a canonical example}. In linear algebra, there really isn't a good way to compare two arbitrary vectors. For example, in $\bR^2$, the vectors $(0, 1)$ and $(1, 0)$ are indistinguishable (especially before the choice of a basis). This appears to be a huge problem in optimization, where questions of the form ``minimize \dots'', inherently requires us to be able to compare stuff to each other. 
+Many things cannot be compared to each other\footnote{Apples and oranges is a canonical example}. For example, in $\bR^2$, the vectors $(0, 1)$ and $(1, 0)$ are indistinguishable (especially before the choice of a basis). This appears to be a huge problem in optimization, where questions of the form ``minimize \dots'', inherently require us to be able to compare stuff to each other. 
 
-However, this is a non-issue, as we introduce the concept of a \textit{partial order}.
+To remedy this, we introduce concept of a \textit{partial order}.
 
-PARTIAL ORDER DEFINITION
+\begin{definition}
+    A partial order $\preceq$ over a set $S$ is a relation satisfying the following three axioms for all $x, y, z\in S$:
+    \begin{enumerate}[label=(\roman*)]
+        \item Reflexivity: $x\preceq x$
+        \item Antisymmetry: $x\preceq y$ and $y\preceq x\implies x=y$
+        \item Transitivity: $x\preceq y$ and $y\preceq z\implies x\preceq z$.
+    \end{enumerate}
+\end{definition}
 
-Unlike \textit{total orders}, we are allowed to have pairs of objects $a, b$ which are \textbf{incomparable}, meaning neither $a\preceq b$ or $b\preceq a$.
+Unlike \textit{total orders}, we are allowed to have pairs of objects $a, b$ which are \textbf{incomparable}, meaning neither $a\preceq b$ or $b\preceq a$. Due to this, we'll need to make a distinction between a \textit{minimal} element and a \textit{minimum} element of a set.
+
+\begin{definition}
+    Let $S$ be a set with a partial order $\preceq$. Then $x$ is a \textbf{minimum} element of $S$ if $x\preceq y$ for all $y\in S$. 
+\end{definition}
+\begin{definition}
+    Let $S$ be a set with a partial order $\preceq$. Then $x$ is a \textbf{minimal} element of $S$ if $y\preceq x\implies y=x$.
+\end{definition}
+So $x$ is a minimum $\iff$ $x$ is smaller than everything, while $x$ is minimal $\iff$ there is nothing smaller than $x$. For total orders, these two definitions coincide.
 
 \begin{example}
     We are already familiar with a partial order--- the \textit{less than or equal to} relation $\le$ over the real numbers. We can generalize this to obtain a natural partial order in $\bR^n$, where
@@ -713,7 +728,34 @@ Proposition \ref{prpccciffselfdual} can be used to provide a geometric interpret
 \begin{proof}
 Hi
 \end{proof}
-Farkas' lemma and other such \textit{theorems of the alternative} are the foundation of a beautiful duality theory in linear programming. It is strongly recommended that the reader be familiar with these ideas.
+Farkas' lemma and other such \textit{theorems of the alternative} are the foundation of duality theory in linear programming.
+\subsection{Ellipsoids}
+We'll introduce the ellipsoid in $\bR^n$, but these definitions can easily be adapted for any Euclidean space.
+\begin{definition}
+    Let $A\in\bS_+^n, b\in\bR^n$, and $\alpha\in\bR$. Define
+    \begin{equation}
+        \cE=\set{x\in\bR^n}{x^\top Ax+b^\top x+\alpha\le 0}.
+    \end{equation}
+    Then $\cE$ is a convex set and we call $\cE$ an \textbf{ellipsoid}. Furthermore, if $A$ is singular, we call $\cE$ \textbf{degenerate}, and it has an empty interior.
+\end{definition}
+We can extend a lot of properties of the ellipse to higher dimensions. The first is obvious: any ellipse is the affine image of the unit ball. Intuitively, we can just send each of the unit basis vectors to a separate ``axis'' of the ellipsoid.
+\begin{proposition}
+    Suppose that $\cE$ is an ellipsoid as above. Then there exists an affine transformation $\cA:\bR^n\to\bR^n$ so that
+    \begin{equation}
+        \cE=\cA(B(0;1)).
+    \end{equation}
+    Recall that $B(0;1)$ is the unit ball.
+\end{proposition}
+\begin{exercise}
+    Recall that if $A\in\bS_+^n$ is a positive semidefinite matrix of rank $r$, then it can be factored into $A=QQ^\top$ for some $Q\in\bR^{n\times r}$ of full rank. Suppose we define the ellipsoid $\cE$ as above. Can you rewrite it using the inequality
+    \begin{equation}
+        \norm{Qx-d}^2+\beta\le 0.
+    \end{equation}
+\end{exercise}
+\begin{exercise}
+    Let $A\subseteq\bR^n$ be a bounded set with non-empty interior. Then show there exists a unique ellipsoid $\cE$ of minimal volume centred at the origin containing $A$.
+\end{exercise}
+(towards ellipsoid method)
 \section{Convex Functions}
 \subsection{Preliminary Definitions}
 We've seen many examples of the importance and elegance of convex sets. As we shall see, there is a very natural correspondence between convex sets and convex functions, which will allow us to transfer much of the theory over. In particular, we will be able to derive several properties which are crucial to the success of convex optimization.
